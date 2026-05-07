@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "channel": "stable",
+  "publishedAt": "2026-05-07T00:00:00Z",
+  "minimumHostVersion": "0.1.0",
+  "app": {
+    "version": "0.0.0",
+    "changelog": "No OTA release has been published yet.",
+    "platforms": {}
+  },
+  "plugins": [],
+  "signature": "placeholder-not-signed"
+}

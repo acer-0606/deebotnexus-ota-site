@@ -1,0 +1,9 @@
+private-updater/
+artifacts/
+*.dn-plugin
+*.key
+*.pem
+*.p12
+*.mobileprovision
+.env
+.DS_Store
