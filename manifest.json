@@ -1,87 +1,87 @@
 {
-  "schemaVersion": 1,
-  "channel": "stable",
-  "publishedAt": "2026-05-07T04:15:45Z",
-  "minimumHostVersion": "0.1.0",
   "app": {
-    "version": "0.1.0",
     "changelog": "DeebotNexus 0.1.0 release update.",
     "platforms": {
       "darwin-aarch64": {
-        "url": "https://github.com/fucker-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/DeebotNexus-main-macos-0.1.0.dn-ota",
+        "encryption": {
+          "format": "dn-ota",
+          "keyId": "main-app-ota-v1",
+          "payloadPath": "payloads/DeebotNexus.app.tar.gz"
+        },
+        "payloadSha256": "7bab93d4e901b01727292c98b7de8ca02f15f6b8ddfd706c4cafd7b52744d8f4",
         "sha256": "ffaa77a5ee1b9e46e1ee63a6a8fa97e87e194e6c73fc4a03cdc4d03ffc59be3a",
         "tauriSignature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTTlCaUxPOElUNHkwbmxCZ3dQOStURnNWRWNrNkpIczVRRG93UDFjU0lkTVJuTGdZWm4zSnhtc2RqYnY3NnpkK1UrN3BhSDdpOWxtbzNOQ1NnZE5vdVEwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4MTIxODk2CWZpbGU6RGVlYm90TmV4dXMuYXBwLnRhci5nego5bmMxSS9qU1BJWDRmZEs2azJBWVBZVDArNDF5WWkrV3Byd2d1OUJKc0lNL3JQWHdZa2ttWTFrTWJIa3g2WEI0QzJZdWl5NVZ1S0xIMy91S3RpYk5DZz09Cg==",
-        "payloadSha256": "7bab93d4e901b01727292c98b7de8ca02f15f6b8ddfd706c4cafd7b52744d8f4",
-        "encryption": {
-          "format": "dn-ota",
-          "payloadPath": "payloads/DeebotNexus.app.tar.gz",
-          "keyId": "main-app-ota-v1"
-        }
+        "url": "https://github.com/fucker-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/DeebotNexus-main-macos-0.1.0.dn-ota"
       },
       "windows-x86_64": {
-        "url": "https://github.com/fucker-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/DeebotNexus-main-windows-x86_64-0.1.0.dn-ota",
-        "sha256": "0bb811fd2a4feebb5bda3653a9594989f0d9331436ecd2a803b93f2eed2f4aa3",
-        "tauriSignature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTStETTh1cnl1T25sd1E3ekN3S1FyWi85MzhjTjFUQ1RScUJPK1RGSmlJbHc5TjdiRWlrRFVIcTlNWUZ0aTNOTkxlNVp5NnorUjMyU2tEQkNqRnd5Q2c4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4MTI2NDA0CWZpbGU6RGVlYm90TmV4dXMtbWFpbi13aW5kb3dzLXg4Nl82NC0wLjEuMC1zZXR1cC5leGUKUE5RNzB1ZnRxS1VORUFWNTlvVW5GamNtTTlrQXpXVys4Z1lNWFcvZGFMNWdxMjBvWndsV2dEUWo4aEk1UmlMQk1ycFMrd3Naa2gwLzMvQ3RMc2tlQVE9PQo=",
-        "payloadSha256": "7c45d002ed554555ea6587b7ced3f4b297584beff1d95241fee9aeb0ca0dc3bf",
         "encryption": {
           "format": "dn-ota",
-          "payloadPath": "payloads/DeebotNexus-main-windows-x86_64-0.1.0-setup.exe",
-          "keyId": "main-app-ota-v1"
-        }
-      }
-    }
-  },
-  "plugins": [
-    {
-      "id": "lds-2d-viewer",
-      "name": "LDS 实时查看器",
-      "version": "0.1.0",
-      "changelog": "LDS 2D viewer release.",
-      "platforms": [
-        "darwin-aarch64",
-        "darwin-x86_64",
-        "windows-x86_64"
-      ],
-      "url": "https://github.com/fucker-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/lds-2d-viewer-0.1.0.dn-ota",
-      "sha256": "b0d91a4790268156f5a8a73b748c5d81d11013b99d2adcdf9778247c46b500c6",
-      "signature": "74765ab16c7fb15a8cdbf192ddb028e1d5c4166aec1de5c07244092d2a1a2da301d58c441f3956e226981ea2892eecba46d512f50e8c32870b751b3961ed0b08",
-      "requiresManualConfigReview": false,
-      "hostVersion": {
-        "min": "0.1.0",
-        "max": null
-      },
-      "payloadSha256": "d022135bb1f25d957b30998183eafda916abff35dd8dbfc0deb0aa1ad813b3ac",
-      "encryption": {
-        "format": "dn-ota",
-        "payloadPath": "payloads/lds-2d-viewer-0.1.0.dn-plugin",
-        "keyId": "plugin-ota-v1"
+          "keyId": "main-app-ota-v1",
+          "payloadPath": "payloads/DeebotNexus-main-windows-x86_64-0.1.0-setup.exe"
+        },
+        "payloadSha256": "7c45d002ed554555ea6587b7ced3f4b297584beff1d95241fee9aeb0ca0dc3bf",
+        "sha256": "0bb811fd2a4feebb5bda3653a9594989f0d9331436ecd2a803b93f2eed2f4aa3",
+        "tauriSignature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTStETTh1cnl1T25sd1E3ekN3S1FyWi85MzhjTjFUQ1RScUJPK1RGSmlJbHc5TjdiRWlrRFVIcTlNWUZ0aTNOTkxlNVp5NnorUjMyU2tEQkNqRnd5Q2c4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4MTI2NDA0CWZpbGU6RGVlYm90TmV4dXMtbWFpbi13aW5kb3dzLXg4Nl82NC0wLjEuMC1zZXR1cC5leGUKUE5RNzB1ZnRxS1VORUFWNTlvVW5GamNtTTlrQXpXVys4Z1lNWFcvZGFMNWdxMjBvWndsV2dEUWo4aEk1UmlMQk1ycFMrd3Naa2gwLzMvQ3RMc2tlQVE9PQo=",
+        "url": "https://github.com/fucker-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/DeebotNexus-main-windows-x86_64-0.1.0.dn-ota"
       }
     },
+    "version": "0.1.0"
+  },
+  "channel": "stable",
+  "minimumHostVersion": "0.1.0",
+  "plugins": [
     {
-      "id": "sensor-3d-viewer",
-      "name": "Sensor 3D Viewer",
-      "version": "0.1.0",
-      "changelog": "Sensor 3D viewer release.",
+      "changelog": "LDS 2D viewer release.",
+      "encryption": {
+        "format": "dn-ota",
+        "keyId": "plugin-ota-v1",
+        "payloadPath": "payloads/lds-2d-viewer-0.1.0.dn-plugin"
+      },
+      "hostVersion": {
+        "max": null,
+        "min": "0.1.0"
+      },
+      "id": "lds-2d-viewer",
+      "name": "LDS 实时查看器",
+      "payloadSha256": "d022135bb1f25d957b30998183eafda916abff35dd8dbfc0deb0aa1ad813b3ac",
       "platforms": [
         "darwin-aarch64",
         "darwin-x86_64",
         "windows-x86_64"
       ],
-      "url": "https://github.com/fucker-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/sensor-3d-viewer-0.1.0.dn-ota",
-      "sha256": "c5a136b7072f311d15c8e10640d280d6e52bd095da7f462cc6fb2094a85504f5",
-      "signature": "d6bf3fd3fbf56065d4d246542a369996d3d5a31664f096a5917f0fd6386cabe552a64a7cfffd62135a08ba0ace82cd96eba8b260be8928673b1815240162600a",
       "requiresManualConfigReview": false,
-      "hostVersion": {
-        "min": "0.1.0",
-        "max": null
-      },
-      "payloadSha256": "6b9d3893c4fc9c4a3edf0621ab9735f78d9e6d0a88704325cee661214abb744d",
+      "sha256": "b0d91a4790268156f5a8a73b748c5d81d11013b99d2adcdf9778247c46b500c6",
+      "signature": "74765ab16c7fb15a8cdbf192ddb028e1d5c4166aec1de5c07244092d2a1a2da301d58c441f3956e226981ea2892eecba46d512f50e8c32870b751b3961ed0b08",
+      "url": "https://github.com/fucker-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/lds-2d-viewer-0.1.0.dn-ota",
+      "version": "0.1.0"
+    },
+    {
+      "changelog": "Sensor 3D viewer release.",
       "encryption": {
         "format": "dn-ota",
-        "payloadPath": "payloads/sensor-3d-viewer-0.1.0.dn-plugin",
-        "keyId": "plugin-ota-v1"
-      }
+        "keyId": "plugin-ota-v1",
+        "payloadPath": "payloads/sensor-3d-viewer-0.1.0.dn-plugin"
+      },
+      "hostVersion": {
+        "max": null,
+        "min": "0.1.0"
+      },
+      "id": "sensor-3d-viewer",
+      "name": "Sensor 3D Viewer",
+      "payloadSha256": "6b9d3893c4fc9c4a3edf0621ab9735f78d9e6d0a88704325cee661214abb744d",
+      "platforms": [
+        "darwin-aarch64",
+        "darwin-x86_64",
+        "windows-x86_64"
+      ],
+      "requiresManualConfigReview": false,
+      "sha256": "c5a136b7072f311d15c8e10640d280d6e52bd095da7f462cc6fb2094a85504f5",
+      "signature": "d6bf3fd3fbf56065d4d246542a369996d3d5a31664f096a5917f0fd6386cabe552a64a7cfffd62135a08ba0ace82cd96eba8b260be8928673b1815240162600a",
+      "url": "https://github.com/fucker-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/sensor-3d-viewer-0.1.0.dn-ota",
+      "version": "0.1.0"
     }
   ],
-  "signature": "script-generated-local-release-manifest"
+  "publishedAt": "2026-05-07T04:15:45Z",
+  "schemaVersion": 1,
+  "signature": "4036f5b6cfa90591a1d7939560a6bb862a22e42ac73f6d3d8bdf3ef8d758c19c40dd1feab0ad6e111ac6ada7abf2854328c445bcefd38cf332f64245c4f01000"
 }
