@@ -5,7 +5,7 @@
   "platforms": {
     "darwin-aarch64": {
       "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTTlCaUxPOElUNHkwbmxCZ3dQOStURnNWRWNrNkpIczVRRG93UDFjU0lkTVJuTGdZWm4zSnhtc2RqYnY3NnpkK1UrN3BhSDdpOWxtbzNOQ1NnZE5vdVEwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4MTIxODk2CWZpbGU6RGVlYm90TmV4dXMuYXBwLnRhci5nego5bmMxSS9qU1BJWDRmZEs2azJBWVBZVDArNDF5WWkrV3Byd2d1OUJKc0lNL3JQWHdZa2ttWTFrTWJIa3g2WEI0QzJZdWl5NVZ1S0xIMy91S3RpYk5DZz09Cg==",
-      "url": "https://github.com/fucker-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/DeebotNexus-main-macos-0.1.0.dn-ota",
+      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/DeebotNexus-main-macos-0.1.0.dn-ota",
       "payloadSha256": "7bab93d4e901b01727292c98b7de8ca02f15f6b8ddfd706c4cafd7b52744d8f4",
       "encryption": {
         "format": "dn-ota",
@@ -16,7 +16,7 @@
     },
     "windows-x86_64": {
       "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTStETTh1cnl1T25sd1E3ekN3S1FyWi85MzhjTjFUQ1RScUJPK1RGSmlJbHc5TjdiRWlrRFVIcTlNWUZ0aTNOTkxlNVp5NnorUjMyU2tEQkNqRnd5Q2c4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4MTI2NDA0CWZpbGU6RGVlYm90TmV4dXMtbWFpbi13aW5kb3dzLXg4Nl82NC0wLjEuMC1zZXR1cC5leGUKUE5RNzB1ZnRxS1VORUFWNTlvVW5GamNtTTlrQXpXVys4Z1lNWFcvZGFMNWdxMjBvWndsV2dEUWo4aEk1UmlMQk1ycFMrd3Naa2gwLzMvQ3RMc2tlQVE9PQo=",
-      "url": "https://github.com/fucker-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/DeebotNexus-main-windows-x86_64-0.1.0.dn-ota",
+      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/DeebotNexus-main-windows-x86_64-0.1.0.dn-ota",
       "payloadSha256": "7c45d002ed554555ea6587b7ced3f4b297584beff1d95241fee9aeb0ca0dc3bf",
       "encryption": {
         "format": "dn-ota",

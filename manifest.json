@@ -11,7 +11,7 @@
         "payloadSha256": "7bab93d4e901b01727292c98b7de8ca02f15f6b8ddfd706c4cafd7b52744d8f4",
         "sha256": "ffaa77a5ee1b9e46e1ee63a6a8fa97e87e194e6c73fc4a03cdc4d03ffc59be3a",
         "tauriSignature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTTlCaUxPOElUNHkwbmxCZ3dQOStURnNWRWNrNkpIczVRRG93UDFjU0lkTVJuTGdZWm4zSnhtc2RqYnY3NnpkK1UrN3BhSDdpOWxtbzNOQ1NnZE5vdVEwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4MTIxODk2CWZpbGU6RGVlYm90TmV4dXMuYXBwLnRhci5nego5bmMxSS9qU1BJWDRmZEs2azJBWVBZVDArNDF5WWkrV3Byd2d1OUJKc0lNL3JQWHdZa2ttWTFrTWJIa3g2WEI0QzJZdWl5NVZ1S0xIMy91S3RpYk5DZz09Cg==",
-        "url": "https://github.com/fucker-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/DeebotNexus-main-macos-0.1.0.dn-ota"
+        "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/DeebotNexus-main-macos-0.1.0.dn-ota"
       },
       "windows-x86_64": {
         "encryption": {
@@ -22,7 +22,7 @@
         "payloadSha256": "7c45d002ed554555ea6587b7ced3f4b297584beff1d95241fee9aeb0ca0dc3bf",
         "sha256": "0bb811fd2a4feebb5bda3653a9594989f0d9331436ecd2a803b93f2eed2f4aa3",
         "tauriSignature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTStETTh1cnl1T25sd1E3ekN3S1FyWi85MzhjTjFUQ1RScUJPK1RGSmlJbHc5TjdiRWlrRFVIcTlNWUZ0aTNOTkxlNVp5NnorUjMyU2tEQkNqRnd5Q2c4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4MTI2NDA0CWZpbGU6RGVlYm90TmV4dXMtbWFpbi13aW5kb3dzLXg4Nl82NC0wLjEuMC1zZXR1cC5leGUKUE5RNzB1ZnRxS1VORUFWNTlvVW5GamNtTTlrQXpXVys4Z1lNWFcvZGFMNWdxMjBvWndsV2dEUWo4aEk1UmlMQk1ycFMrd3Naa2gwLzMvQ3RMc2tlQVE9PQo=",
-        "url": "https://github.com/fucker-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/DeebotNexus-main-windows-x86_64-0.1.0.dn-ota"
+        "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/DeebotNexus-main-windows-x86_64-0.1.0.dn-ota"
       }
     },
     "version": "0.1.0"
@@ -52,7 +52,7 @@
       "requiresManualConfigReview": false,
       "sha256": "b0d91a4790268156f5a8a73b748c5d81d11013b99d2adcdf9778247c46b500c6",
       "signature": "74765ab16c7fb15a8cdbf192ddb028e1d5c4166aec1de5c07244092d2a1a2da301d58c441f3956e226981ea2892eecba46d512f50e8c32870b751b3961ed0b08",
-      "url": "https://github.com/fucker-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/lds-2d-viewer-0.1.0.dn-ota",
+      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/lds-2d-viewer-0.1.0.dn-ota",
       "version": "0.1.0"
     },
     {
@@ -77,7 +77,7 @@
       "requiresManualConfigReview": false,
       "sha256": "c5a136b7072f311d15c8e10640d280d6e52bd095da7f462cc6fb2094a85504f5",
       "signature": "d6bf3fd3fbf56065d4d246542a369996d3d5a31664f096a5917f0fd6386cabe552a64a7cfffd62135a08ba0ace82cd96eba8b260be8928673b1815240162600a",
-      "url": "https://github.com/fucker-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/sensor-3d-viewer-0.1.0.dn-ota",
+      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/sensor-3d-viewer-0.1.0.dn-ota",
       "version": "0.1.0"
     }
   ],
