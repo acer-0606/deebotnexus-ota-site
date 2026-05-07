@@ -21,6 +21,6 @@ Client endpoints:
 
 ```toml
 [updater]
-tauri_endpoint = "https://fucker-0606.github.io/deebotnexus-ota-site/latest.json"
-deebot_manifest_url = "https://fucker-0606.github.io/deebotnexus-ota-site/manifest.json"
+tauri_endpoint = "https://acer-0606.github.io/deebotnexus-ota-site/latest.json"
+deebot_manifest_url = "https://acer-0606.github.io/deebotnexus-ota-site/manifest.json"
 ```
