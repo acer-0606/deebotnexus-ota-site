@@ -12,17 +12,6 @@
         "sha256": "ffaa77a5ee1b9e46e1ee63a6a8fa97e87e194e6c73fc4a03cdc4d03ffc59be3a",
         "tauriSignature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTTlCaUxPOElUNHkwbmxCZ3dQOStURnNWRWNrNkpIczVRRG93UDFjU0lkTVJuTGdZWm4zSnhtc2RqYnY3NnpkK1UrN3BhSDdpOWxtbzNOQ1NnZE5vdVEwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4MTIxODk2CWZpbGU6RGVlYm90TmV4dXMuYXBwLnRhci5nego5bmMxSS9qU1BJWDRmZEs2azJBWVBZVDArNDF5WWkrV3Byd2d1OUJKc0lNL3JQWHdZa2ttWTFrTWJIa3g2WEI0QzJZdWl5NVZ1S0xIMy91S3RpYk5DZz09Cg==",
         "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/DeebotNexus-main-macos-0.1.0.dn-ota"
-      },
-      "windows-x86_64": {
-        "encryption": {
-          "format": "dn-ota",
-          "keyId": "main-app-ota-v1",
-          "payloadPath": "payloads/DeebotNexus-main-windows-x86_64-0.1.0-setup.exe"
-        },
-        "payloadSha256": "7c45d002ed554555ea6587b7ced3f4b297584beff1d95241fee9aeb0ca0dc3bf",
-        "sha256": "0bb811fd2a4feebb5bda3653a9594989f0d9331436ecd2a803b93f2eed2f4aa3",
-        "tauriSignature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTStETTh1cnl1T25sd1E3ekN3S1FyWi85MzhjTjFUQ1RScUJPK1RGSmlJbHc5TjdiRWlrRFVIcTlNWUZ0aTNOTkxlNVp5NnorUjMyU2tEQkNqRnd5Q2c4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4MTI2NDA0CWZpbGU6RGVlYm90TmV4dXMtbWFpbi13aW5kb3dzLXg4Nl82NC0wLjEuMC1zZXR1cC5leGUKUE5RNzB1ZnRxS1VORUFWNTlvVW5GamNtTTlrQXpXVys4Z1lNWFcvZGFMNWdxMjBvWndsV2dEUWo4aEk1UmlMQk1ycFMrd3Naa2gwLzMvQ3RMc2tlQVE9PQo=",
-        "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/DeebotNexus-main-windows-x86_64-0.1.0.dn-ota"
       }
     },
     "version": "0.1.0"
@@ -83,5 +72,5 @@
   ],
   "publishedAt": "2026-05-07T04:15:45Z",
   "schemaVersion": 1,
-  "signature": "acbc9523c28a7b234418cf3a342f7982cf9335a7d529c1ac79571acec69749a2e498e685a0671c1a542c33033a52c85039d6cf2fa8b0bc4295621bf27c2a350a"
+  "signature": "34371a9e3d38887d718b1ad0f09dcbbc0e22be74910f51845a9195aab825deda221af8cd97217746ec56e80f36d02aa8027304f023c708850699541c4310b30c"
 }
