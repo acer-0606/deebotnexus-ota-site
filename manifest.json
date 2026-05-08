@@ -1,6 +1,6 @@
 {
   "app": {
-    "changelog": "DeebotNexus macOS release update.",
+    "changelog": "DeebotNexus 0.1 main app OTA update.",
     "platforms": {
       "darwin-aarch64": {
         "encryption": {
@@ -11,7 +11,18 @@
         "payloadSha256": "eea9e7ef2f057bdbe7ef7373426b3079122e3d16cfda2a94931897ecf553fa78",
         "sha256": "73ff6cf3d47c6158b3d1d58cf1ac4cbad44e59e365a8b12d9e95a062200cd299",
         "tauriSignature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTTVkMmFydXVVT1BwL25HUFpsam05UDBuY3Zsd2tJNG1pYnpBKzZrY1IyMHltNGV6di9WUzczSlI1Y0ZKWlBOek5NWUFIbzlEeDVxdU9aa1JuemtGeXdJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4MjA2NDExCWZpbGU6RGVlYm90TmV4dXMuYXBwLnRhci5negpWOENMU2VrVWVEY0gzWUUvdFFaeVBramxpWWVzaDBWRVEwVXVGVFp0UUpvQzRtaE8xZnFBNXBTR3ZGdXJNMWw4Z21jQ2VxeGkrOGNGT1VhRVhqQXpCZz09Cg==",
-        "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/DeebotNexus-main-macos-0.1.1.dn-ota"
+        "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.1/DeebotNexus-main-macos-0.1.1.dn-ota"
+      },
+      "windows-x86_64": {
+        "encryption": {
+          "format": "dn-ota",
+          "keyId": "main-app-ota-v1",
+          "payloadPath": "payloads/DeebotNexus-main-windows-x86_64-0.1.1-setup.exe"
+        },
+        "payloadSha256": "6b8bb0d7cf2a2de85116ab605c932600f3871b788233c3266c9530fd73560f33",
+        "sha256": "f7f1778f1421690627a7d637d30545b2efcc188c1b33d3cb17cdb53003eb56a9",
+        "tauriSignature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTS9QRFQwRXg2U29SdWl3TFVkKzErdkJpdHZDYnYxZlpMZlRhMzJJa3UrNHMwa2U5SGtOUlhRcE9kSnRHNWFOWi9VWHZrMkZmNlhFQ1U2SGgrK2E2WUFRPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4MjA4NDMwCWZpbGU6RGVlYm90TmV4dXMtbWFpbi13aW5kb3dzLXg4Nl82NC0wLjEuMS1zZXR1cC5leGUKY3Y1ckF5VS94ckYycjhXUXNuN1hVdkxyUldVWXZNcmdjdXFSbmdpSDZGTmZ5eE1WVmNjbjI0WklnU0M5biszQUxjK1k4Y2FzazZDSmJRSy9sNlh4Qmc9PQo=",
+        "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.1/DeebotNexus-main-windows-x86_64-0.1.1.dn-ota"
       }
     },
     "version": "0.1.1"
@@ -41,7 +52,7 @@
       "requiresManualConfigReview": false,
       "sha256": "b0d91a4790268156f5a8a73b748c5d81d11013b99d2adcdf9778247c46b500c6",
       "signature": "74765ab16c7fb15a8cdbf192ddb028e1d5c4166aec1de5c07244092d2a1a2da301d58c441f3956e226981ea2892eecba46d512f50e8c32870b751b3961ed0b08",
-      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/lds-2d-viewer-0.1.0.dn-ota",
+      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.1/lds-2d-viewer-0.1.0.dn-ota",
       "version": "0.1.0"
     },
     {
@@ -66,11 +77,11 @@
       "requiresManualConfigReview": false,
       "sha256": "c5a136b7072f311d15c8e10640d280d6e52bd095da7f462cc6fb2094a85504f5",
       "signature": "d6bf3fd3fbf56065d4d246542a369996d3d5a31664f096a5917f0fd6386cabe552a64a7cfffd62135a08ba0ace82cd96eba8b260be8928673b1815240162600a",
-      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/offline-ota-v1/sensor-3d-viewer-0.1.0.dn-ota",
+      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.1/sensor-3d-viewer-0.1.0.dn-ota",
       "version": "0.1.0"
     }
   ],
-  "publishedAt": "2026-05-08T02:13:48.676Z",
+  "publishedAt": "2026-05-08T02:52:20.276Z",
   "schemaVersion": 1,
-  "signature": "58fa5010c9cd32c129a233c6b65b7eb2d4c60a59d07e739e735999ceb9c1a9d8938f4e7c7b6db26a63e7dc90cfb51e7ceffae20f956cf78c492046ac142c5a09"
+  "signature": "2388bd83c9d3d945930a9acfac4e476dc4eb03f738597aa6c0122cf3b29da5ae3f0339df68e7a88b032eebe4b43eb58616e406c27c9869c0951a6e87faa93903"
 }
