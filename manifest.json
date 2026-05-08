@@ -56,11 +56,11 @@
       "version": "0.1.0"
     },
     {
-      "changelog": "Sensor 3D viewer release.",
+      "changelog": "Sensor 3D viewer 0.1.1 fixes Z-up orbit rotation.",
       "encryption": {
         "format": "dn-ota",
         "keyId": "plugin-ota-v1",
-        "payloadPath": "payloads/sensor-3d-viewer-0.1.0.dn-plugin"
+        "payloadPath": "payloads/sensor-3d-viewer-0.1.1.dn-plugin"
       },
       "hostVersion": {
         "max": null,
@@ -68,20 +68,20 @@
       },
       "id": "sensor-3d-viewer",
       "name": "Sensor 3D Viewer",
-      "payloadSha256": "6b9d3893c4fc9c4a3edf0621ab9735f78d9e6d0a88704325cee661214abb744d",
+      "payloadSha256": "65de7160d1a2521489e31bba4b94363f93babd4f5b75e336e478ea5c44b70df8",
       "platforms": [
         "darwin-aarch64",
         "darwin-x86_64",
         "windows-x86_64"
       ],
       "requiresManualConfigReview": false,
-      "sha256": "c5a136b7072f311d15c8e10640d280d6e52bd095da7f462cc6fb2094a85504f5",
-      "signature": "d6bf3fd3fbf56065d4d246542a369996d3d5a31664f096a5917f0fd6386cabe552a64a7cfffd62135a08ba0ace82cd96eba8b260be8928673b1815240162600a",
-      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.1/sensor-3d-viewer-0.1.0.dn-ota",
-      "version": "0.1.0"
+      "sha256": "372d6b43d7b706fe6cd23e13cd82a0fe080b7a2a94811e1dafc23ef7396928e4",
+      "signature": "31e7bc9cfee2863ac5df1cccbbb0d3560d2bc1c125dbaea917a089756993b3670761a27ed9e3b81bacd711e4bbf043107794270b779bb574c0d32aedb60f0a07",
+      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.1/sensor-3d-viewer-0.1.1.dn-ota",
+      "version": "0.1.1"
     }
   ],
-  "publishedAt": "2026-05-08T07:11:06.985Z",
+  "publishedAt": "2026-05-08T07:39:41.883Z",
   "schemaVersion": 1,
-  "signature": "845a83f4ce92c52b8f08bd3d5b0fee45427efa34152a13d174ee99d97d24eed542ec1a9a5458ae1ec1ada366ff94587e621778e2696a33fb996bb2c4cd78b90c"
+  "signature": "8f78410b46236a4c099905af82af8efde3eba68b697cb8b8c7b5bd2299ea61170450a2bb2339039537a9760d2c4a76baa82c380951395502a7b4a6422695ab00"
 }
