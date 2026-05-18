@@ -1,6 +1,6 @@
 {
   "app": {
-    "changelog": "DeebotNexus 0.2.2 main app OTA update.",
+    "changelog": "DeebotNexus 0.2.3 main app OTA update.",
     "platforms": {
       "darwin-aarch64": {
         "encryption": {
@@ -8,24 +8,24 @@
           "keyId": "main-app-ota-v1",
           "payloadPath": "payloads/DeebotNexus.app.tar.gz"
         },
-        "payloadSha256": "a96af3f84d8dc3acc300af2bbec685f9fb78a5aa844acc5a22a6d29ab75a7af8",
-        "sha256": "37339429c19109216eebebd40be0b3be13d39a01124cc46df55d3695d3c36474",
-        "tauriSignature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTXlmNFUwYXoyZllKM3plRFdhZWdTUlNwTEZLV0xOR2QzYlRhbzlOZFNZblhodmY3MFNRZExEZWR3VUZNTDNFK3FITEhBSDBhU2pSUWNsbldZVGtwZHdNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc5MDkzMDI3CWZpbGU6RGVlYm90TmV4dXMuYXBwLnRhci5negpLc0JNQ2ozYW0wK2krVnlmR0doSDRSMHRwaVI3ODZPU2J1cFQyM1IzT214Vm81aU1qR1pUL1pQNjBBUDV5YUoySEg2ZEl5eEtZQXBLVFFBWU1BK1JCdz09Cg==",
-        "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/DeebotNexus-main-macos-0.2.2.dn-ota"
+        "payloadSha256": "7ad52592a1d3014409091aa26b376b231af7d1807469536edfb54a9357160427",
+        "sha256": "6dd103a3b0a8aed9d6117acc93aa215d909c77958548e07083147dde2d072079",
+        "tauriSignature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTS9tV3h3VmFaclJkU0dUYVZPWUdpNHhsaFJTZVpWT0dLSThmQmxwcXk2TnB0RjEwdVpEakt3ZS9wbjFhVjY3UFRnN1E2bUlPVUQvbmFrdWt6akw3cFFzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc5MDk3NDA3CWZpbGU6RGVlYm90TmV4dXMuYXBwLnRhci5negpydmVydFZOcVBtUUIyeFVNNmE1YXE0cHpEMUJSVTNKQ05zakN3UXNyVmlBeW5WR0pBUEhSRDIyektMY1RzMU9URnpNdFVSd3ArMkszelhucGhLZk9EZz09Cg==",
+        "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/DeebotNexus-main-macos-0.2.3.dn-ota"
       },
       "windows-x86_64": {
         "encryption": {
           "format": "dn-ota",
           "keyId": "main-app-ota-v1",
-          "payloadPath": "payloads/DeebotNexus-main-windows-x86_64-0.2.2-setup.exe"
+          "payloadPath": "payloads/DeebotNexus-main-windows-x86_64-0.2.3-setup.exe"
         },
-        "payloadSha256": "c2f3bdf22cd054ce3cdb99a992448b17f63688808b99c6974c22d3f1a15f7c98",
-        "sha256": "9994405086e0536cf4c8cd7a89e40b81a37a3ec32c570fe1a1f37778f5c0275f",
-        "tauriSignature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTXgxZHp2RmZLRmxFeU5MS0RjTGtBbVU0K0pRdDEwSEIyQStiajBNdWpxTFNLeGFxci92SjI5VmZzc0FYTVROVXh0Ym5rNFpkUW1KakpjNG8zT2srUGdFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc5MDkzMTcwCWZpbGU6RGVlYm90TmV4dXMtbWFpbi13aW5kb3dzLXg4Nl82NC0wLjIuMi1zZXR1cC5leGUKKzNJYmNRZ1RkTEEyOS9ZMmxQYUpBSEViVHVVVU9LYy9WTTJlbm9XTStZaGRyTWE2eTQ0WHVwd0FqcnlkMlFKOGttK1ZhdHh6VCsxdjBLdmVMaENpQkE9PQo=",
-        "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/DeebotNexus-main-windows-x86_64-0.2.2.dn-ota"
+        "payloadSha256": "29311355ffc05bb4b6c4f157a00256c054889517fffbbf7fc07a65439f62e247",
+        "sha256": "f4c3891c5e1c90a9d92a1d241a6c8aed40735c2b387725f142c8220b9b45a949",
+        "tauriSignature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTXdMK2ZGUkJRZ3NJZGxYRmYxakZ2bFJTdEo1bUllVkFYOEZUdXJoNktpZDBaeExlL1R3V1IzZm95K05XNXlYbmQ2b0ZlMjNjcDV2cG1GMjBVWEtXd3dvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc5MTAwNDAwCWZpbGU6RGVlYm90TmV4dXMtbWFpbi13aW5kb3dzLXg4Nl82NC0wLjIuMy1zZXR1cC5leGUKUDNRYzhkeGJlSlN2RndMNnJVQlhNMDc5c3RoV1VHZnh6MlNuTGdxTkRvWXQwQmpyb1VzLy9ocVVmWWpONkkrc3JXSnVrY0lORkhta0tnTnBvWWFhQ0E9PQo=",
+        "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/DeebotNexus-main-windows-x86_64-0.2.3.dn-ota"
       }
     },
-    "version": "0.2.2"
+    "version": "0.2.3"
   },
   "channel": "stable",
   "minimumHostVersion": "0.1.0",
@@ -99,7 +99,7 @@
       "version": "0.1.1"
     }
   ],
-  "publishedAt": "2026-05-18T09:18:11.722Z",
+  "publishedAt": "2026-05-18T09:44:01.574Z",
   "schemaVersion": 1,
-  "signature": "1708e8943756e7733a170cc69374fb06b35b6dc09a467f3f6ea61766a8d5d6cc078f41d8cc4f9a7eb8c28fed9ecfa37599a629e0eb94104ec0392ab179a18802"
+  "signature": "7bc88e96931dbcb315e7dbb0c1bc7ff4da72adf380442d66fa3ffdfaa3a68c07a1fb670b65a42500438c0c346c3ac64951485ad9c382f38ee7391065c547b309"
 }
