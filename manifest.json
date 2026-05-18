@@ -90,15 +90,16 @@
       "id": "service-automation-workflow",
       "name": "Service Automation Workflow",
       "platforms": [
-        "darwin-aarch64"
+        "darwin-aarch64",
+        "windows-x86_64"
       ],
       "requiresManualConfigReview": false,
-      "sha256": "c616392110a9bfc250f8e56a7834bb67b401ec174a5c15d6ab1d0c28251cf3df",
+      "sha256": "58d9034bfa7db4daf5fa4bd2e670a7aaf90fa297b5554033055a4b817f4d3f20",
       "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/service-automation-workflow-0.1.1.dn-ota",
       "version": "0.1.1"
     }
   ],
-  "publishedAt": "2026-05-18T08:31:05.216Z",
+  "publishedAt": "2026-05-18T09:18:11.722Z",
   "schemaVersion": 1,
-  "signature": "888e913679b8eed731e4d4e418baa11c109b57a5e8c01a94fbcc5633b7c8e99684af0b2d491b2a875bf3022cabc69f02a42ac25062c4e27f8143511869df7e06"
+  "signature": "1708e8943756e7733a170cc69374fb06b35b6dc09a467f3f6ea61766a8d5d6cc078f41d8cc4f9a7eb8c28fed9ecfa37599a629e0eb94104ec0392ab179a18802"
 }
