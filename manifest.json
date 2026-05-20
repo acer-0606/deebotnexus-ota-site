@@ -54,7 +54,7 @@
       "version": "0.1.1"
     },
     {
-      "changelog": "Sensor 3D viewer release.",
+      "changelog": "Sensor 3D viewer 0.1.3 keeps hidden sensor frames out of the visible point-cloud cache.",
       "encryption": {
         "format": "dn-ota",
         "keyId": "plugin-ota-v1",
@@ -72,9 +72,9 @@
         "windows-x86_64"
       ],
       "requiresManualConfigReview": false,
-      "sha256": "a5b881eb2011643f960838317e067490f85d9c038dd804fd0e53734ebf499d9e",
-      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sensor-3d-viewer-0.1.2.dn-ota",
-      "version": "0.1.2"
+      "sha256": "5b94b776262a592141fc1a4a153d6114ebfecd42d7d6b745cfd426a132465efa",
+      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sensor-3d-viewer-0.1.3.dn-ota",
+      "version": "0.1.3"
     },
     {
       "changelog": "Service automation workflow release.",
@@ -99,7 +99,7 @@
       "version": "0.1.1"
     }
   ],
-  "publishedAt": "2026-05-18T09:44:01.574Z",
+  "publishedAt": "2026-05-20T04:22:38.437Z",
   "schemaVersion": 1,
-  "signature": "7bc88e96931dbcb315e7dbb0c1bc7ff4da72adf380442d66fa3ffdfaa3a68c07a1fb670b65a42500438c0c346c3ac64951485ad9c382f38ee7391065c547b309"
+  "signature": "4cce6e4fcf8722d40980d004314b7c91fa2da0c0b8c4767c08bf734601b5f1013211cfe3e75054e10ddd7e01156acd4f36e686f7718385dbeeb48d4f6311570a"
 }
