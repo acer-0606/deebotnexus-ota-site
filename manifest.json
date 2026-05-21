@@ -1,6 +1,6 @@
 {
   "app": {
-    "changelog": "DeebotNexus 0.2.4 main app OTA update.",
+    "changelog": "DeebotNexus 0.2.5 releases plugin teardown resource cleanup.",
     "platforms": {
       "darwin-aarch64": {
         "encryption": {
@@ -8,30 +8,30 @@
           "keyId": "main-app-ota-v1",
           "payloadPath": "payloads/DeebotNexus.app.tar.gz"
         },
-        "payloadSha256": "566a8b8d166cd95588211a45bebdfd48da905ad694a8f992b75166c5bc34251b",
-        "sha256": "63dde06e6bf4432b3165018182e92126bf9c6abb23653cd5061e5a0cdfa06cba",
-        "tauriSignature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTTlmbEt4SVVYc2owUUJKSGdWNWRacWZBWEVrUGhkbGNBM2VpY3BHeXMzclQvMWR1aGZCY0Z3VjZMZURiWU1VYVhwMzBjWjZISHdoYkJUanRUTTFPUXcwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc5MzI5MTMyCWZpbGU6RGVlYm90TmV4dXMuYXBwLnRhci5negpBcGJ2bEYxbkJMNHdmZEp3T0Y0UU9lRS9XM0kyUEVpNE4zU3ZnVm1GZHhtcklSektScDlEdjNReXJzYU5KMHdYZkk2SU5YUkIzd0xBODg2L01ha3BEZz09Cg==",
-        "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/DeebotNexus-main-macos-0.2.4.dn-ota"
+        "payloadSha256": "07c3da656a3e0b5917c2ef8cf92e8c2c2ebf49b63c0f8d300ea90ccfefb9aa03",
+        "sha256": "6faf0cf72f2a131097a3602f48f418e4eb232bfbecce965221f7ee0b82ed6527",
+        "tauriSignature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTXpNaGxQbkJLYi9CdmNXVWptcFNTUTFjUkJXUm5obndsZnEzWUk5TGJ4dHBQMXNlK0xLOHZPdEZkcHFRQU1kRmNLSTIzQXgxUk9EVHVza2hmZkNzSlFVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc5MzUzMDI2CWZpbGU6RGVlYm90TmV4dXMuYXBwLnRhci5negprcTlMZ2YvMTV0QnozcnlsYlJJbFBnV2x6cmVpaWo4TlBxN000bGEraGNnLzdSUHl1eUdhWlpoeWFacU94Mnhham1JbGtlVXRpeWY3d0IzamtJcVZCQT09Cg==",
+        "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/DeebotNexus-main-macos-0.2.5.dn-ota"
       },
       "windows-x86_64": {
         "encryption": {
           "format": "dn-ota",
           "keyId": "main-app-ota-v1",
-          "payloadPath": "payloads/DeebotNexus-main-windows-x86_64-0.2.4-setup.exe"
+          "payloadPath": "payloads/DeebotNexus-main-windows-x86_64-0.2.5-setup.exe"
         },
-        "payloadSha256": "25046f6e4efa3def3fedc0c6c31200dcd72486cc383c7be1f24cd10f9cd1dafc",
-        "sha256": "e3f5f6ac3b417bea1b37aa6d88b50681179788b2b04b5b7c377ad56138f4bcae",
-        "tauriSignature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTXc0ZU1qTG1PVHBRUFVFUThiU2J5ZTNjc0tWLytCM3hmcG5HUEJNV0hmUzF4WUJoZjZxWHpUdUkvbVcrTFdIV2Rxa3A4K3c4RkFpZXdhbHJEbmk1aFFrPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc5MzI5MzUwCWZpbGU6RGVlYm90TmV4dXMtbWFpbi13aW5kb3dzLXg4Nl82NC0wLjIuNC1zZXR1cC5leGUKbWdkclk4T1VYWjFQMkVPS1Fpc2VpcFJjWS9GeXRvSk90RWhLb2ZET3JZZHBaT0xjUU5RWlhQdVA3bDFwNWlNN0lWbmZzbG1ONlkyeHpoQlJpUkdHQUE9PQo=",
-        "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/DeebotNexus-main-windows-x86_64-0.2.4.dn-ota"
+        "payloadSha256": "a15a559f90adaa5d23c3cc8f99fb76c4a2ff1900423e9993664ac3a69318ece1",
+        "sha256": "74217f5d6861d3d7365f89e83e4574425509541ab3c47f690bce9c19588a9c3a",
+        "tauriSignature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTTRuRXpIaVE0bUNYbHlPY2diYVY4bHFJaytEU2ZXQ01CdWhZZ2xiL3k2SHgrd1pwTmlpMk52Q2JNY1B6bC83NnlNN2hPWUY5VjFsRjRFWVR3Zklod0FBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc5MzUzMjA3CWZpbGU6RGVlYm90TmV4dXMtbWFpbi13aW5kb3dzLXg4Nl82NC0wLjIuNS1zZXR1cC5leGUKdDlrdkwwWE82SGsxWk4yeVo2YjdSSkxVU0RpR2xHZlQ4RCtCK05DR25RSDRlNzdUK3NYNHlTa0xxZXhESTZCYS9OUUVNRkxoaFVlaTg0MU9rMzV1Q1E9PQo=",
+        "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/DeebotNexus-main-windows-x86_64-0.2.5.dn-ota"
       }
     },
-    "version": "0.2.4"
+    "version": "0.2.5"
   },
   "channel": "stable",
   "minimumHostVersion": "0.1.0",
   "plugins": [
     {
-      "changelog": "IMU/Wheel viewer 0.1.1 fixes prefixed hardware log parsing, next-encoder wheel-speed timestamps, and chart continuity.",
+      "changelog": "IMU/Wheel viewer 0.1.2 releases frontend resources on plugin close.",
       "encryption": {
         "format": "dn-ota",
         "keyId": "plugin-ota-v1",
@@ -49,12 +49,12 @@
         "windows-x86_64"
       ],
       "requiresManualConfigReview": false,
-      "sha256": "fae99f4233db331c24c22d905705e99541ed2370dae26651ad8958d36aedcb05",
-      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/imu-wheel-viewer-0.1.1.dn-ota",
-      "version": "0.1.1"
+      "sha256": "f287d32258af1dd2c58bbd2f991d95b3c19da5c462731ca521f832585583da35",
+      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/imu-wheel-viewer-0.1.2.dn-ota",
+      "version": "0.1.2"
     },
     {
-      "changelog": "LDS 2D viewer release.",
+      "changelog": "LDS 2D viewer 0.1.2 releases frontend resources on plugin close.",
       "encryption": {
         "format": "dn-ota",
         "keyId": "plugin-ota-v1",
@@ -72,12 +72,12 @@
         "windows-x86_64"
       ],
       "requiresManualConfigReview": false,
-      "sha256": "4125fb249b207382c763b39a88119bfa20c3021ff5e8ada28bc58cd86a07a548",
-      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/lds-2d-viewer-0.1.1.dn-ota",
-      "version": "0.1.1"
+      "sha256": "7c19b1243c09e97b8139cb692e6f2feee55954ba59874c0e4addf340c92e1c2d",
+      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/lds-2d-viewer-0.1.2.dn-ota",
+      "version": "0.1.2"
     },
     {
-      "changelog": "Sensor 3D viewer 0.1.3 keeps hidden sensor frames out of the visible point-cloud cache.",
+      "changelog": "Sensor 3D viewer 0.1.4 releases point-cloud rendering resources on plugin close.",
       "encryption": {
         "format": "dn-ota",
         "keyId": "plugin-ota-v1",
@@ -95,12 +95,12 @@
         "windows-x86_64"
       ],
       "requiresManualConfigReview": false,
-      "sha256": "5b94b776262a592141fc1a4a153d6114ebfecd42d7d6b745cfd426a132465efa",
-      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sensor-3d-viewer-0.1.3.dn-ota",
-      "version": "0.1.3"
+      "sha256": "4cb45f162e177cbc416e3f504a288a7b59b424644725b83045432de03d4e5182",
+      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sensor-3d-viewer-0.1.4.dn-ota",
+      "version": "0.1.4"
     },
     {
-      "changelog": "Service automation workflow release.",
+      "changelog": "Service Automation Workflow 0.1.2 releases frontend resources on plugin close.",
       "encryption": {
         "format": "dn-ota",
         "keyId": "plugin-ota-v1",
@@ -117,12 +117,12 @@
         "windows-x86_64"
       ],
       "requiresManualConfigReview": false,
-      "sha256": "58d9034bfa7db4daf5fa4bd2e670a7aaf90fa297b5554033055a4b817f4d3f20",
-      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/service-automation-workflow-0.1.1.dn-ota",
-      "version": "0.1.1"
+      "sha256": "7a57b1367cbb9ea2e4524cf2379ba691c8243609a2685752e3b1386bf5b216e0",
+      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/service-automation-workflow-0.1.2.dn-ota",
+      "version": "0.1.2"
     }
   ],
-  "publishedAt": "2026-05-21T06:32:51.265Z",
+  "publishedAt": "2026-05-21T08:48:16.278Z",
   "schemaVersion": 1,
-  "signature": "2c1ea6945cf0df1e0d0e35fbe44c25403ca8a8de300e5b750b842a48cddbdc748b20a528f62e43f05fbcae72ba35adaab11a51cb08b8b0f654cb28f7f597dd08"
+  "signature": "42767174abc1724f089dd2daa13ea30c264a46b4a555ead1a7ec4e73b2212d6f0311ab5e5bf3ec6d3212010537836467466ad5a0547cd450bad40781e3b71808"
 }
