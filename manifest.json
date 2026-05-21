@@ -31,6 +31,29 @@
   "minimumHostVersion": "0.1.0",
   "plugins": [
     {
+      "changelog": "IMU/Wheel viewer 0.1.1 fixes prefixed hardware log parsing, next-encoder wheel-speed timestamps, and chart continuity.",
+      "encryption": {
+        "format": "dn-ota",
+        "keyId": "plugin-ota-v1",
+        "payloadRoot": "payloads/plugins/imu-wheel-viewer"
+      },
+      "hostVersion": {
+        "max": null,
+        "min": "0.2.4"
+      },
+      "id": "imu-wheel-viewer",
+      "name": "IMU/Wheel 分析器",
+      "platforms": [
+        "darwin-aarch64",
+        "darwin-x86_64",
+        "windows-x86_64"
+      ],
+      "requiresManualConfigReview": false,
+      "sha256": "fae99f4233db331c24c22d905705e99541ed2370dae26651ad8958d36aedcb05",
+      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/imu-wheel-viewer-0.1.1.dn-ota",
+      "version": "0.1.1"
+    },
+    {
       "changelog": "LDS 2D viewer release.",
       "encryption": {
         "format": "dn-ota",
@@ -97,32 +120,9 @@
       "sha256": "58d9034bfa7db4daf5fa4bd2e670a7aaf90fa297b5554033055a4b817f4d3f20",
       "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/service-automation-workflow-0.1.1.dn-ota",
       "version": "0.1.1"
-    },
-    {
-      "changelog": "IMU/Wheel viewer 0.1.0 release with SVG charts and rule-driven offline log parsing.",
-      "encryption": {
-        "format": "dn-ota",
-        "keyId": "plugin-ota-v1",
-        "payloadRoot": "payloads/plugins/imu-wheel-viewer"
-      },
-      "hostVersion": {
-        "max": null,
-        "min": "0.2.4"
-      },
-      "id": "imu-wheel-viewer",
-      "name": "IMU/Wheel 分析器",
-      "platforms": [
-        "darwin-aarch64",
-        "darwin-x86_64",
-        "windows-x86_64"
-      ],
-      "requiresManualConfigReview": false,
-      "sha256": "d6549982ba5a6d1807c09cf03842a16f658a19bdcc5b4b3ac3caa3f6ed8751ad",
-      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/imu-wheel-viewer-0.1.0.dn-ota",
-      "version": "0.1.0"
     }
   ],
-  "publishedAt": "2026-05-21T02:06:11.799Z",
+  "publishedAt": "2026-05-21T06:32:51.265Z",
   "schemaVersion": 1,
-  "signature": "65ed4c02c4dfc00e7dccb50dc8d2d227369a9f28a450e2afc80b86f6aa3850b982541fcfc4849d5e9f303ede080840568ae956e8f503399439d18bfd85db7107"
+  "signature": "2c1ea6945cf0df1e0d0e35fbe44c25403ca8a8de300e5b750b842a48cddbdc748b20a528f62e43f05fbcae72ba35adaab11a51cb08b8b0f654cb28f7f597dd08"
 }
