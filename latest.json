@@ -1,13 +1,13 @@
 {
-  "version": "0.2.3",
-  "notes": "DeebotNexus 0.2.3 main app OTA update.",
-  "pub_date": "2026-05-18T09:44:01.574Z",
+  "version": "0.2.4",
+  "notes": "DeebotNexus 0.2.4 main app OTA update.",
+  "pub_date": "2026-05-21T02:06:11.799Z",
   "platforms": {
     "darwin-aarch64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTS9tV3h3VmFaclJkU0dUYVZPWUdpNHhsaFJTZVpWT0dLSThmQmxwcXk2TnB0RjEwdVpEakt3ZS9wbjFhVjY3UFRnN1E2bUlPVUQvbmFrdWt6akw3cFFzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc5MDk3NDA3CWZpbGU6RGVlYm90TmV4dXMuYXBwLnRhci5negpydmVydFZOcVBtUUIyeFVNNmE1YXE0cHpEMUJSVTNKQ05zakN3UXNyVmlBeW5WR0pBUEhSRDIyektMY1RzMU9URnpNdFVSd3ArMkszelhucGhLZk9EZz09Cg==",
-      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/DeebotNexus-main-macos-0.2.3.dn-ota",
-      "sha256": "6dd103a3b0a8aed9d6117acc93aa215d909c77958548e07083147dde2d072079",
-      "payloadSha256": "7ad52592a1d3014409091aa26b376b231af7d1807469536edfb54a9357160427",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTTlmbEt4SVVYc2owUUJKSGdWNWRacWZBWEVrUGhkbGNBM2VpY3BHeXMzclQvMWR1aGZCY0Z3VjZMZURiWU1VYVhwMzBjWjZISHdoYkJUanRUTTFPUXcwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc5MzI5MTMyCWZpbGU6RGVlYm90TmV4dXMuYXBwLnRhci5negpBcGJ2bEYxbkJMNHdmZEp3T0Y0UU9lRS9XM0kyUEVpNE4zU3ZnVm1GZHhtcklSektScDlEdjNReXJzYU5KMHdYZkk2SU5YUkIzd0xBODg2L01ha3BEZz09Cg==",
+      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/DeebotNexus-main-macos-0.2.4.dn-ota",
+      "sha256": "63dde06e6bf4432b3165018182e92126bf9c6abb23653cd5061e5a0cdfa06cba",
+      "payloadSha256": "566a8b8d166cd95588211a45bebdfd48da905ad694a8f992b75166c5bc34251b",
       "encryption": {
         "format": "dn-ota",
         "payloadPath": "payloads/DeebotNexus.app.tar.gz",
@@ -15,13 +15,13 @@
       }
     },
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTXdMK2ZGUkJRZ3NJZGxYRmYxakZ2bFJTdEo1bUllVkFYOEZUdXJoNktpZDBaeExlL1R3V1IzZm95K05XNXlYbmQ2b0ZlMjNjcDV2cG1GMjBVWEtXd3dvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc5MTAwNDAwCWZpbGU6RGVlYm90TmV4dXMtbWFpbi13aW5kb3dzLXg4Nl82NC0wLjIuMy1zZXR1cC5leGUKUDNRYzhkeGJlSlN2RndMNnJVQlhNMDc5c3RoV1VHZnh6MlNuTGdxTkRvWXQwQmpyb1VzLy9ocVVmWWpONkkrc3JXSnVrY0lORkhta0tnTnBvWWFhQ0E9PQo=",
-      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/DeebotNexus-main-windows-x86_64-0.2.3.dn-ota",
-      "sha256": "f4c3891c5e1c90a9d92a1d241a6c8aed40735c2b387725f142c8220b9b45a949",
-      "payloadSha256": "29311355ffc05bb4b6c4f157a00256c054889517fffbbf7fc07a65439f62e247",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTXc0ZU1qTG1PVHBRUFVFUThiU2J5ZTNjc0tWLytCM3hmcG5HUEJNV0hmUzF4WUJoZjZxWHpUdUkvbVcrTFdIV2Rxa3A4K3c4RkFpZXdhbHJEbmk1aFFrPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc5MzI5MzUwCWZpbGU6RGVlYm90TmV4dXMtbWFpbi13aW5kb3dzLXg4Nl82NC0wLjIuNC1zZXR1cC5leGUKbWdkclk4T1VYWjFQMkVPS1Fpc2VpcFJjWS9GeXRvSk90RWhLb2ZET3JZZHBaT0xjUU5RWlhQdVA3bDFwNWlNN0lWbmZzbG1ONlkyeHpoQlJpUkdHQUE9PQo=",
+      "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/DeebotNexus-main-windows-x86_64-0.2.4.dn-ota",
+      "sha256": "e3f5f6ac3b417bea1b37aa6d88b50681179788b2b04b5b7c377ad56138f4bcae",
+      "payloadSha256": "25046f6e4efa3def3fedc0c6c31200dcd72486cc383c7be1f24cd10f9cd1dafc",
       "encryption": {
         "format": "dn-ota",
-        "payloadPath": "payloads/DeebotNexus-main-windows-x86_64-0.2.3-setup.exe",
+        "payloadPath": "payloads/DeebotNexus-main-windows-x86_64-0.2.4-setup.exe",
         "keyId": "main-app-ota-v1"
       }
     }
