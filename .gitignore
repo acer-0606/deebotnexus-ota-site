@@ -1,5 +1,8 @@
 private-updater/
 artifacts/
+.local-ota/
+__pycache__/
+*.pyc
 *.dn-plugin
 *.key
 *.pem
