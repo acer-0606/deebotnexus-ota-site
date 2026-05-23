@@ -69,11 +69,19 @@ python3 subrepos/ota-site/tools/local_ota_mirror.py run --port 18080 --interval 
 - `http://<局域网IP>:18080/latest.json`
 - `http://<局域网IP>:18080/manifest.json`
 - `http://<局域网IP>:18080/connect-tools-configs.json`
+- `http://<局域网IP>:18080/timestamp.json`
+- `http://<局域网IP>:18080/snapshots/<snapshot-id>/snapshot.json`
 - `http://<局域网IP>:18080/snapshots/<snapshot-id>/assets/<name>.dn-ota`
 
 生成后的 JSON 会把 OTA 包 URL 写成带 `<snapshot-id>` 的地址。这样设备即使已经
 拿到旧 JSON，服务随后切换到新快照，旧 JSON 里的包 URL 仍然能下载到对应旧快照
 中的文件。
+
+桥接升级：旧客户端仍然可以指向镜像服务的 `/latest.json`。当上游已发布 v2
+快照元数据时，镜像会缓存快照声明的主程序 `.dn-ota`，并把本地 `latest.json`
+里的下载 URL 改写到 `/snapshots/<snapshot-id>/assets/<asset>.dn-ota`。镜像不会
+改写 signed `manifest.json`；支持新 manifest/snapshot 流程的客户端应继续按签名
+元数据校验。
 
 如果自动识别的网卡不对，显式指定局域网 IP：
 
@@ -120,7 +128,9 @@ python3 tools/local_ota_mirror.py run --config .local-ota/config.json
   "remote_base_url": "https://acer-0606.github.io/deebotnexus-ota-site",
   "github_proxy": "http://127.0.0.1:7890",
   "github_proxy_username": "proxy-user",
-  "github_proxy_password": "proxy-password"
+  "github_proxy_password": "proxy-password",
+  "metadata_public_key_file": "/path/to/metadata-public-key.hex",
+  "ota_center_bin": "ota-center"
 }
 ```
 
@@ -134,6 +144,10 @@ python3 tools/local_ota_mirror.py run --config .local-ota/config.json
 - `cache_dir`：本地镜像缓存目录；不设置时使用 ota-site 仓库内的 `.local-ota/`。
 - `github_proxy`：仅 GitHub 相关访问使用的代理地址。
 - `github_proxy_username` / `github_proxy_password`：代理账号和密码。
+- `metadata_public_key_file`：v2 元数据验签公钥文件，内容为 hex 或 base64 编码；
+  配置后同步会调用 `ota-center verify-metadata` 验证 `timestamp.json` 和
+  `snapshot.json`。
+- `ota_center_bin`：`ota-center` 可执行文件路径；不设置时使用 `ota-center`。
 
 `github_proxy` 只用于访问 GitHub Pages、GitHub Release assets 和
 `githubusercontent.com` 相关地址；局域网设备访问本机 OTA 服务不会走这个代理。

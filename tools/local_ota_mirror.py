@@ -10,7 +10,9 @@ import os
 import posixpath
 import shutil
 import socket
+import subprocess
 import sys
+import tempfile
 import threading
 import time
 import urllib.error
@@ -31,10 +33,11 @@ GITHUB_PROXY_DOMAINS = ("github.com", "github.io", "githubusercontent.com")
 
 
 class DownloadRef:
-    def __init__(self, url, sha256, asset_name):
+    def __init__(self, url, sha256, asset_name, length=None):
         self.url = url
         self.sha256 = sha256
         self.asset_name = asset_name
+        self.length = length
 
 
 class SyncResult:
@@ -47,10 +50,27 @@ class SyncResult:
         self.changed = changed
 
 
-def sync_mirror(remote_base_url, cache_dir, public_base_url, timeout=30, github_proxy=""):
+def sync_mirror(remote_base_url, cache_dir, public_base_url, timeout=30, github_proxy="", metadata_verifier=None):
     """Fetch remote metadata/assets and write a self-contained local mirror."""
     cache_dir = Path(cache_dir)
     snapshots_dir = cache_dir / "snapshots"
+    timestamp = fetch_v2_timestamp(
+        remote_base_url,
+        timeout,
+        github_proxy=github_proxy,
+        metadata_verifier=metadata_verifier,
+    )
+    if timestamp is not None:
+        return sync_v2_mirror(
+            remote_base_url,
+            cache_dir,
+            public_base_url,
+            timestamp,
+            timeout,
+            github_proxy=github_proxy,
+            metadata_verifier=metadata_verifier,
+        )
+
     metadata = fetch_remote_metadata(remote_base_url, timeout, github_proxy=github_proxy)
     refs_by_url = collect_download_refs(metadata)
     unique_refs = unique_refs_by_asset(refs_by_url)
@@ -137,6 +157,257 @@ def sync_mirror(remote_base_url, cache_dir, public_base_url, timeout=30, github_
         raise
 
 
+def sync_v2_mirror(remote_base_url, cache_dir, public_base_url, timestamp, timeout=30, github_proxy="", metadata_verifier=None):
+    cache_dir = Path(cache_dir)
+    snapshots_dir = cache_dir / "snapshots"
+    snapshot_name = timestamp["value"].get("snapshotId")
+    if not valid_snapshot_name(snapshot_name):
+        raise ValueError("invalid v2 snapshotId: %r" % (snapshot_name,))
+
+    snapshot = fetch_v2_snapshot(
+        remote_base_url,
+        timestamp["value"],
+        timeout,
+        github_proxy=github_proxy,
+        metadata_verifier=metadata_verifier,
+    )
+    if snapshot["value"].get("snapshotId") != snapshot_name:
+        raise ValueError("snapshotId mismatch between timestamp and snapshot")
+
+    metadata = fetch_remote_metadata(remote_base_url, timeout, github_proxy=github_proxy)
+    latest = metadata["latest.json"]
+    refs_by_url = collect_v2_download_refs(snapshot["value"])
+    unique_refs = unique_refs_by_asset(refs_by_url)
+    public_base_url = public_base_url.rstrip("/")
+
+    snapshot_dir = snapshots_dir / snapshot_name
+    staging_dir = snapshots_dir / (snapshot_name + ".tmp")
+    assets_dir = staging_dir / "assets"
+    download_count = 0
+    reused_count = 0
+
+    snapshot_public_base_url = "%s/snapshots/%s" % (
+        public_base_url,
+        urllib.parse.quote(snapshot_name),
+    )
+    rewritten_latest = rewrite_legacy_latest_urls(latest, refs_by_url, snapshot_public_base_url)
+    state_metadata = {
+        "timestamp.json": timestamp["value"],
+        "snapshot.json": snapshot["value"],
+        **metadata,
+    }
+
+    if snapshot_dir.exists():
+        if not reusable_v2_snapshot(
+            snapshot_dir,
+            timestamp["value"],
+            snapshot["value"],
+            rewritten_latest,
+            metadata,
+            unique_refs,
+        ):
+            raise ValueError("existing v2 snapshot %s does not match fetched metadata/assets" % snapshot_name)
+        write_v2_current_state(
+            cache_dir,
+            remote_base_url,
+            public_base_url,
+            state_metadata,
+            unique_refs,
+            snapshot_name,
+        )
+        return SyncResult(
+            metadata_count=2 + len(metadata),
+            asset_count=len(unique_refs),
+            download_count=0,
+            reused_count=len(unique_refs),
+            snapshot_name=snapshot_name,
+            changed=False,
+        )
+
+    if staging_dir.exists():
+        shutil.rmtree(staging_dir)
+
+    try:
+        assets_dir.mkdir(parents=True, exist_ok=True)
+        for ref in unique_refs:
+            if copy_existing_asset(cache_dir, ref, assets_dir / ref.asset_name):
+                reused_count += 1
+            elif ensure_asset(ref, assets_dir, timeout, github_proxy=github_proxy):
+                download_count += 1
+            else:
+                reused_count += 1
+
+        write_json_atomic(staging_dir / "timestamp.json", timestamp["value"])
+        write_json_atomic(staging_dir / "snapshot.json", snapshot["value"])
+        write_json_atomic(staging_dir / "latest.json", rewritten_latest)
+        write_json_atomic(staging_dir / "manifest.json", metadata["manifest.json"])
+        if "connect-tools-configs.json" in metadata:
+            write_json_atomic(
+                staging_dir / "connect-tools-configs.json",
+                metadata["connect-tools-configs.json"],
+            )
+
+        os.replace(str(staging_dir), str(snapshot_dir))
+        write_v2_current_state(
+            cache_dir,
+            remote_base_url,
+            public_base_url,
+            state_metadata,
+            unique_refs,
+            snapshot_name,
+        )
+        return SyncResult(
+            metadata_count=2 + len(metadata),
+            asset_count=len(unique_refs),
+            download_count=download_count,
+            reused_count=reused_count,
+            snapshot_name=snapshot_name,
+            changed=True,
+        )
+    except Exception:
+        if staging_dir.exists():
+            shutil.rmtree(staging_dir)
+        raise
+
+
+def fetch_v2_timestamp(remote_base_url, timeout, github_proxy="", metadata_verifier=None):
+    remote_base_url = remote_base_url.rstrip("/") + "/"
+    url = urllib.parse.urljoin(remote_base_url, "timestamp.json")
+    try:
+        text = fetch_bytes(url, timeout, github_proxy=github_proxy).decode("utf-8")
+    except Exception as error:
+        if is_missing_optional_file(error):
+            return None
+        raise RuntimeError("failed to fetch v2 timestamp metadata %s: %s" % (url, error))
+
+    try:
+        value = json.loads(text)
+    except Exception as error:
+        raise RuntimeError("failed to parse v2 timestamp metadata %s: %s" % (url, error))
+    if not isinstance(value, dict):
+        raise ValueError("v2 timestamp metadata must be a JSON object")
+    verify_signed_metadata("timestamp.json", text, value.get("signature"), metadata_verifier)
+    return {"name": "timestamp.json", "text": text, "value": value}
+
+
+def fetch_v2_snapshot(remote_base_url, timestamp, timeout, github_proxy="", metadata_verifier=None):
+    snapshot_path = timestamp.get("snapshotPath")
+    if not valid_relative_metadata_path(snapshot_path):
+        raise ValueError("timestamp snapshotPath is invalid")
+    expected_sha256 = timestamp.get("snapshotSha256")
+    if not is_sha256(expected_sha256):
+        raise ValueError("timestamp snapshotSha256 is invalid")
+    expected_length = timestamp.get("snapshotLength")
+    if not valid_positive_int(expected_length):
+        raise ValueError("timestamp snapshotLength is invalid")
+
+    remote_base_url = remote_base_url.rstrip("/") + "/"
+    url = urllib.parse.urljoin(remote_base_url, snapshot_path)
+    data = fetch_bytes(url, timeout, github_proxy=github_proxy)
+    if len(data) != expected_length:
+        raise ValueError(
+            "length mismatch for %s: expected %s, got %s"
+            % (snapshot_path, expected_length, len(data)),
+        )
+    digest = hashlib.sha256(data).hexdigest()
+    if digest != expected_sha256:
+        raise ValueError(
+            "sha256 mismatch for %s: expected %s, got %s"
+            % (snapshot_path, expected_sha256, digest),
+        )
+    text = data.decode("utf-8")
+    value = json.loads(text)
+    if not isinstance(value, dict):
+        raise ValueError("v2 snapshot metadata must be a JSON object")
+    verify_signed_metadata(snapshot_path, text, value.get("signature"), metadata_verifier)
+    return {"name": snapshot_path, "text": text, "value": value}
+
+
+def verify_signed_metadata(name, text, signature, metadata_verifier):
+    if not callable(metadata_verifier):
+        raise RuntimeError("metadata verifier is required for v2 OTA metadata: %s" % name)
+    if not isinstance(signature, str) or not signature:
+        raise ValueError("metadata signature is required: %s" % name)
+    metadata_verifier(name, text, signature)
+
+
+def collect_v2_download_refs(snapshot):
+    refs_by_url = {}
+    refs_by_name = {}
+    targets = snapshot.get("targets")
+    if not isinstance(targets, list):
+        raise ValueError("snapshot targets must be an array")
+
+    for target in targets:
+        if not isinstance(target, dict):
+            raise ValueError("snapshot target must be a JSON object")
+        asset_name = target.get("assetName")
+        if not valid_asset_name(asset_name):
+            raise ValueError("snapshot target assetName is invalid")
+        sha256 = target.get("sha256")
+        if not is_sha256(sha256):
+            raise ValueError("snapshot target %s has invalid sha256" % asset_name)
+        length = target.get("length")
+        if not valid_positive_int(length):
+            raise ValueError("snapshot target %s has invalid length" % asset_name)
+        url = first_target_url(target)
+        if not url:
+            raise ValueError("snapshot target %s does not provide a download URL" % asset_name)
+        if not ota_url(url):
+            raise ValueError("snapshot target URL does not end with .dn-ota: %s" % url)
+        validate_snapshot_mirror_location(target, asset_name)
+
+        ref = DownloadRef(url=url, sha256=sha256.lower(), asset_name=asset_name, length=length)
+        existing = refs_by_url.get(url)
+        if existing:
+            if existing.sha256 != ref.sha256 or existing.length != ref.length:
+                raise ValueError("conflicting snapshot target metadata for %s" % url)
+            continue
+        same_name = refs_by_name.get(asset_name)
+        if same_name and same_name.sha256 != ref.sha256:
+            raise ValueError("asset name collision for %s with different sha256 values" % asset_name)
+        refs_by_url[url] = ref
+        refs_by_name.setdefault(asset_name, ref)
+    return refs_by_url
+
+
+def first_target_url(target):
+    locations = target.get("locations")
+    if not isinstance(locations, list):
+        return ""
+    for location in locations:
+        if isinstance(location, dict) and isinstance(location.get("url"), str):
+            return location["url"]
+    return ""
+
+
+def validate_snapshot_mirror_location(target, asset_name):
+    locations = target.get("locations")
+    if not isinstance(locations, list):
+        raise ValueError("snapshot target locations must be an array")
+    expected_path = "assets/%s" % asset_name
+    for location in locations:
+        if not isinstance(location, dict):
+            raise ValueError("snapshot target location must be a JSON object")
+        if location.get("kind") == "snapshotMirror" and location.get("path") == expected_path:
+            return
+    raise ValueError("snapshot target %s is missing snapshotMirror path %s" % (asset_name, expected_path))
+
+
+def rewrite_legacy_latest_urls(latest, refs_by_url, snapshot_public_base_url):
+    copied = copy.deepcopy(latest)
+    for entry in (copied.get("platforms") or {}).values():
+        if not isinstance(entry, dict):
+            continue
+        ref = refs_by_url.get(entry.get("url"))
+        if ref:
+            entry["url"] = "%s/assets/%s" % (
+                snapshot_public_base_url.rstrip("/"),
+                urllib.parse.quote(ref.asset_name),
+            )
+    return copied
+
+
 def fetch_remote_metadata(remote_base_url, timeout, github_proxy=""):
     remote_base_url = remote_base_url.rstrip("/") + "/"
     metadata = {}
@@ -204,11 +475,39 @@ def ota_url(url):
 def asset_name_from_url(url):
     parsed = urllib.parse.urlparse(url)
     name = Path(urllib.parse.unquote(parsed.path)).name
-    if not name or name in (".", "..") or "/" in name:
+    if not valid_asset_name(name):
         raise ValueError("invalid OTA asset URL: %s" % url)
-    if not name.endswith(".dn-ota"):
-        raise ValueError("OTA asset does not end with .dn-ota: %s" % url)
     return name
+
+
+def valid_asset_name(value):
+    return (
+        isinstance(value, str)
+        and value
+        and value not in (".", "..")
+        and "/" not in value
+        and "\\" not in value
+        and value.endswith(".dn-ota")
+    )
+
+
+def valid_positive_int(value):
+    return isinstance(value, int) and not isinstance(value, bool) and value > 0
+
+
+def valid_relative_metadata_path(value):
+    if not isinstance(value, str) or not value or value.startswith("/"):
+        return False
+    parsed = urllib.parse.urlsplit(value)
+    if parsed.scheme or parsed.netloc:
+        return False
+    if "\\" in value:
+        return False
+    for component in value.split("/"):
+        decoded = urllib.parse.unquote(component)
+        if not decoded or decoded in (".", "..") or "/" in decoded or "\\" in decoded:
+            return False
+    return True
 
 
 def is_sha256(value):
@@ -253,9 +552,59 @@ def reusable_current_snapshot(cache_dir, remote_base_url, public_base_url, metad
         return ""
     for ref in refs:
         asset_path = snapshot_dir / "assets" / ref.asset_name
-        if not asset_path.exists() or sha256_file(asset_path) != ref.sha256:
+        if not asset_matches(asset_path, ref):
             return ""
     return snapshot_name
+
+
+def reusable_v2_snapshot(snapshot_dir, timestamp, snapshot, rewritten_latest, metadata, refs):
+    expected_documents = {
+        "timestamp.json": timestamp,
+        "snapshot.json": snapshot,
+        "latest.json": rewritten_latest,
+        "manifest.json": metadata["manifest.json"],
+    }
+    if "connect-tools-configs.json" in metadata:
+        expected_documents["connect-tools-configs.json"] = metadata["connect-tools-configs.json"]
+
+    for name, expected in expected_documents.items():
+        path = snapshot_dir / name
+        if not path.is_file():
+            return False
+        try:
+            existing = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            return False
+        if existing != expected:
+            return False
+
+    for ref in refs:
+        asset_path = snapshot_dir / "assets" / ref.asset_name
+        if not asset_matches(asset_path, ref):
+            return False
+    return True
+
+
+def write_v2_current_state(cache_dir, remote_base_url, public_base_url, metadata, refs, snapshot_name):
+    write_json_atomic(
+        cache_dir / "current.json",
+        {
+            "snapshot": snapshot_name,
+            "updatedAt": current_timestamp(),
+        },
+    )
+    write_json_atomic(
+        cache_dir / "state.json",
+        {
+            "remoteBaseUrl": remote_base_url.rstrip("/"),
+            "publicBaseUrl": public_base_url,
+            "metadataDigest": digest_metadata(metadata),
+            "metadataFiles": sorted(metadata.keys()),
+            "assetCount": len(refs),
+            "snapshot": snapshot_name,
+            "lastSyncedAt": current_timestamp(),
+        },
+    )
 
 
 def copy_existing_asset(cache_dir, ref, target):
@@ -265,11 +614,20 @@ def copy_existing_asset(cache_dir, ref, target):
     except Exception:
         return False
     source = snapshot_path(cache_dir, snapshot_name) / "assets" / ref.asset_name
-    if not source.exists() or sha256_file(source) != ref.sha256:
+    if not asset_matches(source, ref):
         return False
     target.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(source, target)
     return True
+
+
+def asset_matches(path, ref):
+    path = Path(path)
+    if not path.exists():
+        return False
+    if ref.length is not None and path.stat().st_size != ref.length:
+        return False
+    return sha256_file(path) == ref.sha256
 
 
 def new_snapshot_name():
@@ -281,16 +639,21 @@ def new_snapshot_name():
 
 def ensure_asset(ref, assets_dir, timeout, github_proxy=""):
     target = assets_dir / ref.asset_name
-    if target.exists() and sha256_file(target) == ref.sha256:
+    if asset_matches(target, ref):
         return False
 
     tmp = target.with_name(target.name + ".tmp")
     try:
-        digest = download_to_file(ref.url, tmp, timeout, github_proxy=github_proxy)
+        digest, length = download_to_file(ref.url, tmp, timeout, github_proxy=github_proxy)
         if digest != ref.sha256:
             raise ValueError(
                 "sha256 mismatch for %s: expected %s, got %s"
                 % (ref.url, ref.sha256, digest),
+            )
+        if ref.length is not None and length != ref.length:
+            raise ValueError(
+                "length mismatch for %s: expected %s, got %s"
+                % (ref.url, ref.length, length),
             )
         os.replace(str(tmp), str(target))
         return True
@@ -301,6 +664,7 @@ def ensure_asset(ref, assets_dir, timeout, github_proxy=""):
 
 def download_to_file(url, target, timeout, github_proxy=""):
     hasher = hashlib.sha256()
+    length = 0
     with open_url(url, timeout, github_proxy=github_proxy) as response:
         with target.open("wb") as output:
             while True:
@@ -308,8 +672,9 @@ def download_to_file(url, target, timeout, github_proxy=""):
                 if not chunk:
                     break
                 hasher.update(chunk)
+                length += len(chunk)
                 output.write(chunk)
-    return hasher.hexdigest()
+    return hasher.hexdigest(), length
 
 
 def sha256_file(path):
@@ -428,6 +793,8 @@ def apply_config(args):
     apply_string_config(args, config, "github_proxy", "")
     apply_string_config(args, config, "github_proxy_username", "")
     apply_string_config(args, config, "github_proxy_password", "")
+    apply_string_config(args, config, "metadata_public_key_file", "")
+    apply_string_config(args, config, "ota_center_bin", "ota-center")
     apply_int_config(args, config, "port", 18080)
     apply_int_config(args, config, "timeout", 30)
     if hasattr(args, "bind"):
@@ -573,6 +940,7 @@ def run_polling_mirror(args):
     cache_dir = resolve_cache_dir(args.cache_dir)
     base_url = public_base_url(args)
     github_proxy = resolve_github_proxy(args)
+    metadata_verifier = build_metadata_verifier(args.metadata_public_key_file, args.ota_center_bin)
     sync_lock = threading.Lock()
     stop_event = threading.Event()
 
@@ -584,6 +952,7 @@ def run_polling_mirror(args):
                 base_url,
                 timeout=args.timeout,
                 github_proxy=github_proxy,
+                metadata_verifier=metadata_verifier,
             )
         print(
             "%s: synced %s metadata files, %s assets (%s downloaded, %s reused)"
@@ -638,6 +1007,7 @@ def command_sync(args):
         public_base_url=public_base_url(args),
         timeout=args.timeout,
         github_proxy=github_proxy,
+        metadata_verifier=build_metadata_verifier(args.metadata_public_key_file, args.ota_center_bin),
     )
     print(
         "synced %s metadata files, %s assets (%s downloaded, %s reused)"
@@ -662,6 +1032,51 @@ def positive_int(value):
     if parsed <= 0:
         raise argparse.ArgumentTypeError("must be greater than zero")
     return parsed
+
+
+def build_metadata_verifier(metadata_public_key_file, ota_center_bin="ota-center"):
+    if not metadata_public_key_file:
+        return None
+    if not ota_center_bin:
+        ota_center_bin = "ota-center"
+
+    def verify(name, text, signature):
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            suffix=".json",
+            delete=False,
+        ) as handle:
+            handle.write(text)
+            temp_path = handle.name
+        try:
+            result = subprocess.run(
+                [
+                    ota_center_bin,
+                    "verify-metadata",
+                    "--file",
+                    temp_path,
+                    "--public-key-file",
+                    metadata_public_key_file,
+                ],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+        except Exception as error:
+            raise RuntimeError("failed to verify metadata %s: %s" % (name, error)) from error
+        finally:
+            try:
+                os.unlink(temp_path)
+            except FileNotFoundError:
+                pass
+        if result.returncode != 0:
+            raise RuntimeError(
+                "failed to verify metadata %s: exit %s\nstdout: %s\nstderr: %s"
+                % (name, result.returncode, result.stdout, result.stderr),
+            )
+
+    return verify
 
 
 def add_common_sync_args(parser):
@@ -704,6 +1119,16 @@ def add_common_sync_args(parser):
         "--github-proxy-password",
         default=None,
         help="optional GitHub proxy password; prefer config files for real credentials",
+    )
+    parser.add_argument(
+        "--metadata-public-key-file",
+        default=None,
+        help="public key file used by ota-center verify-metadata for v2 metadata",
+    )
+    parser.add_argument(
+        "--ota-center-bin",
+        default=None,
+        help="ota-center executable used for v2 metadata verification (default: ota-center)",
     )
     parser.add_argument("--port", type=positive_int, default=None, help="LAN HTTP port")
     parser.add_argument("--timeout", type=positive_int, default=None, help="network timeout in seconds")
