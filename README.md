@@ -4,6 +4,8 @@
 
 GitHub Pages 只发布轻量级元数据和可选的人类可读首页：
 
+- `timestamp.json`
+- `snapshots/<snapshotId>/snapshot.json`
 - `latest.json`
 - `manifest.json`
 - `connect-tools-configs.json`
@@ -22,9 +24,15 @@ GitHub Pages 应从 `main` 分支的仓库根目录发布。
 
 ```toml
 [updater]
+ota_timestamp_url = "https://acer-0606.github.io/deebotnexus-ota-site/timestamp.json"
+snapshot_mode = "preferred"
 tauri_endpoint = "https://acer-0606.github.io/deebotnexus-ota-site/latest.json"
 deebot_manifest_url = "https://acer-0606.github.io/deebotnexus-ota-site/manifest.json"
 ```
+
+新客户端优先使用 `timestamp.json -> snapshot.json -> targets`。`latest.json` 和
+`manifest.json` 继续保留给旧客户端桥接升级；它们是兼容入口，不提供 v2 的完整
+会话固定和镜像保护。
 
 ## 局域网本地镜像
 
@@ -45,6 +53,8 @@ OTA。镜像服务会读取公开元数据，下载真实 `.dn-ota` release asse
       latest.json
       manifest.json
       connect-tools-configs.json
+      timestamp.json
+      snapshot.json
       assets/
         *.dn-ota
 ```
@@ -82,6 +92,10 @@ python3 subrepos/ota-site/tools/local_ota_mirror.py run --port 18080 --interval 
 里的下载 URL 改写到 `/snapshots/<snapshot-id>/assets/<asset>.dn-ota`。镜像不会
 改写 signed `manifest.json`；支持新 manifest/snapshot 流程的客户端应继续按签名
 元数据校验。
+
+如果 legacy `latest.json` 指向的包没有出现在 signed snapshot targets 中，镜像
+不会替该 URL 下载额外包；旧客户端会继续看到原始 URL。这样可以避免镜像把未被
+snapshot 保护的包伪装成本地桥接资产。
 
 如果自动识别的网卡不对，显式指定局域网 IP：
 
