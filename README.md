@@ -6,9 +6,7 @@ GitHub Pages 只发布轻量级元数据和可选的人类可读首页：
 
 - `timestamp.json`
 - `snapshots/<snapshotId>/snapshot.json`
-- `latest.json`
-- `manifest.json`
-- `connect-tools-configs.json`
+- `connect-tools-configs.json`（可选）
 - `index.html`
 - `README.md`
 
@@ -25,20 +23,19 @@ GitHub Pages 应从 `main` 分支的仓库根目录发布。
 ```toml
 [updater]
 ota_timestamp_url = "https://acer-0606.github.io/deebotnexus-ota-site/timestamp.json"
-snapshot_mode = "preferred"
-tauri_endpoint = "https://acer-0606.github.io/deebotnexus-ota-site/latest.json"
-deebot_manifest_url = "https://acer-0606.github.io/deebotnexus-ota-site/manifest.json"
 ```
 
-新客户端优先使用 `timestamp.json -> snapshot.json -> targets`。`latest.json` 和
-`manifest.json` 继续保留给旧客户端桥接升级；它们是兼容入口，不提供 v2 的完整
-会话固定和镜像保护。
+客户端只使用 `timestamp.json -> snapshot.json -> targets`。公开站点不再提供
+`latest.json` 或 `manifest.json` 兼容入口；主程序、插件和高级工具配置都通过
+snapshot targets 独立声明和校验。
 
 ## 局域网本地镜像
 
 开发者可以在本机启动一个局域网 OTA 镜像服务，供同一局域网内的设备下载
 OTA。镜像服务会读取公开元数据，下载真实 `.dn-ota` release assets，
-按元数据里的 `sha256` 校验文件，再把下载 URL 改写成本机局域网服务地址。
+按 snapshot target 里的 `sha256` 和 `length` 校验文件。snapshot 中保留
+`snapshotMirror` 相对路径，本地服务通过
+`/snapshots/<snapshot-id>/assets/...` 提供这些文件。
 
 所有下载包和生成后的本地元数据都放在 `.local-ota/`，该目录已被 Git 忽略，
 不要提交。同步时会先生成完整快照，全部 `.dn-ota` 下载并校验通过后，才切换
@@ -50,11 +47,9 @@ OTA。镜像服务会读取公开元数据，下载真实 `.dn-ota` release asse
   state.json
   snapshots/
     20260522T143000Z-ab12cd34/
-      latest.json
-      manifest.json
-      connect-tools-configs.json
       timestamp.json
       snapshot.json
+      connect-tools-configs.json
       assets/
         *.dn-ota
 ```
@@ -76,26 +71,19 @@ python3 subrepos/ota-site/tools/local_ota_mirror.py run --port 18080 --interval 
 
 服务会暴露：
 
-- `http://<局域网IP>:18080/latest.json`
-- `http://<局域网IP>:18080/manifest.json`
-- `http://<局域网IP>:18080/connect-tools-configs.json`
 - `http://<局域网IP>:18080/timestamp.json`
+- `http://<局域网IP>:18080/connect-tools-configs.json`（可选）
 - `http://<局域网IP>:18080/snapshots/<snapshot-id>/snapshot.json`
 - `http://<局域网IP>:18080/snapshots/<snapshot-id>/assets/<name>.dn-ota`
 
-生成后的 JSON 会把 OTA 包 URL 写成带 `<snapshot-id>` 的地址。这样设备即使已经
-拿到旧 JSON，服务随后切换到新快照，旧 JSON 里的包 URL 仍然能下载到对应旧快照
-中的文件。
+snapshot target 中的 `snapshotMirror` 是 `assets/<name>.dn-ota` 相对路径。本地
+镜像按当前 snapshot URL 所在目录解析它，因此最终下载地址会包含
+`/snapshots/<snapshot-id>/assets/...`。这样设备即使已经拿到旧 `snapshot.json`，
+服务随后切换到新快照，旧 snapshot 里的包路径仍然能下载到对应旧快照中的文件。
 
-桥接升级：旧客户端仍然可以指向镜像服务的 `/latest.json`。当上游已发布 v2
-快照元数据时，镜像会缓存快照声明的主程序 `.dn-ota`，并把本地 `latest.json`
-里的下载 URL 改写到 `/snapshots/<snapshot-id>/assets/<asset>.dn-ota`。镜像不会
-改写 signed `manifest.json`；支持新 manifest/snapshot 流程的客户端应继续按签名
-元数据校验。
-
-如果 legacy `latest.json` 指向的包没有出现在 signed snapshot targets 中，镜像
-不会替该 URL 下载额外包；旧客户端会继续看到原始 URL。这样可以避免镜像把未被
-snapshot 保护的包伪装成本地桥接资产。
+本地镜像只缓存 snapshot targets 中声明的 `.dn-ota` 文件，并按 target 里的
+`sha256` 和 `length` 校验。`/latest.json` 和 `/manifest.json` 会返回 404，避免
+旧入口绕过 snapshot 固定和目标级校验。
 
 如果自动识别的网卡不对，显式指定局域网 IP：
 
@@ -103,7 +91,7 @@ snapshot 保护的包伪装成本地桥接资产。
 python3 tools/local_ota_mirror.py run --advertise-host 192.168.1.20 --port 18080
 ```
 
-也可以直接指定写入本地元数据的完整 base URL：
+也可以直接指定展示给客户端的完整镜像服务 base URL：
 
 ```bash
 python3 tools/local_ota_mirror.py run --base-url http://192.168.1.20:18080
@@ -153,8 +141,8 @@ python3 tools/local_ota_mirror.py run --config .local-ota/config.json
 - `interval`：轮询 GitHub Pages 元数据的间隔，单位秒。
 - `port`：局域网 OTA HTTP 服务端口。
 - `bind`：HTTP 服务绑定地址，默认 `0.0.0.0`。
-- `advertise_host`：写入本地元数据 URL 的局域网 IP 或主机名。
-- `base_url`：完整覆盖写入本地元数据的 base URL，例如 `http://192.168.1.20:18080`。
+- `advertise_host`：展示给局域网设备访问本机镜像服务的 IP 或主机名。
+- `base_url`：完整覆盖展示给客户端的镜像服务 base URL，例如 `http://192.168.1.20:18080`。
 - `cache_dir`：本地镜像缓存目录；不设置时使用 ota-site 仓库内的 `.local-ota/`。
 - `github_proxy`：仅 GitHub 相关访问使用的代理地址。
 - `github_proxy_username` / `github_proxy_password`：代理账号和密码。
