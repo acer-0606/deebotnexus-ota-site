@@ -5,9 +5,9 @@
   "version": 2,
   "snapshotId": "v0.2-20260526T16221",
   "snapshotPath": "snapshots/v0.2-20260526T16221/snapshot.json",
-  "snapshotSha256": "ffb3a7fb843822e25d365ab7370856b8021e8f5ffa8e20158b193fcc6c7f8386",
-  "snapshotLength": 14800,
+  "snapshotSha256": "863594eb09d18c6cdff1e161be902381d437dc446dd3f6ee0a018fcab9f9356e",
+  "snapshotLength": 14928,
   "publishedAt": "2026-05-26T16:22:29.732Z",
   "expiresAt": "2026-06-25T16:22:29.732Z",
-  "signature": ""
+  "signature": "4e564050e093b7a70c5c99b098c3a5e9f55d8bbb5dbe9f440c35d5acdf0bfe7546a208994abb8a1aab0ad365e9a0a8bc691eda4e47c76b0aff9b04a43053a60f"
 }
