@@ -3,6 +3,7 @@ artifacts/
 .local-ota/
 __pycache__/
 *.pyc
+*.dn-ota
 *.dn-plugin
 *.key
 *.pem

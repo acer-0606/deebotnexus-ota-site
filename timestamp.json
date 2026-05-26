@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "kind": "deebotOtaTimestamp",
+  "channel": "stable",
+  "version": 1,
+  "snapshotId": "v0.2-20260526T15280",
+  "snapshotPath": "snapshots/v0.2-20260526T15280/snapshot.json",
+  "snapshotSha256": "ef2cc8cc532dd54f466f8c744ff6ffbcbc849e9c7ab8a8566c3524fe3936b057",
+  "snapshotLength": 3067,
+  "publishedAt": "2026-05-26T15:28:02.488Z",
+  "expiresAt": "2026-06-25T15:28:02.488Z",
+  "signature": ""
+}
