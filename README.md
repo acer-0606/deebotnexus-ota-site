@@ -131,8 +131,7 @@ python3 tools/local_ota_mirror.py run --config .local-ota/config.json
   "github_proxy": "http://127.0.0.1:7890",
   "github_proxy_username": "proxy-user",
   "github_proxy_password": "proxy-password",
-  "metadata_public_key_file": "/path/to/metadata-public-key.hex",
-  "ota_center_bin": "ota-center"
+  "metadata_public_key_file": "/path/to/metadata-public-key.hex"
 }
 ```
 
@@ -147,9 +146,7 @@ python3 tools/local_ota_mirror.py run --config .local-ota/config.json
 - `github_proxy`：仅 GitHub 相关访问使用的代理地址。
 - `github_proxy_username` / `github_proxy_password`：代理账号和密码。
 - `metadata_public_key_file`：v2 元数据验签公钥文件，内容为 hex 或 base64 编码；
-  配置后同步会调用 `ota-center verify-metadata` 验证 `timestamp.json` 和
-  `snapshot.json`。
-- `ota_center_bin`：`ota-center` 可执行文件路径；不设置时使用 `ota-center`。
+  同步会用它直接验证 `timestamp.json` 和 `snapshot.json` 的签名。
 
 `github_proxy` 只用于访问 GitHub Pages、GitHub Release assets 和
 `githubusercontent.com` 相关地址；局域网设备访问本机 OTA 服务不会走这个代理。

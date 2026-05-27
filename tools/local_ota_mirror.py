@@ -2,6 +2,8 @@
 """Local LAN mirror for DeebotNexus OTA metadata and .dn-ota packages."""
 
 import argparse
+import base64
+import binascii
 import hashlib
 import http.server
 import json
@@ -9,9 +11,7 @@ import os
 import posixpath
 import shutil
 import socket
-import subprocess
 import sys
-import tempfile
 import threading
 import time
 import urllib.error
@@ -29,6 +29,11 @@ ROOT_CURRENT_METADATA_FILES = ("timestamp.json", "connect-tools-configs.json")
 REQUIRED_SNAPSHOT_METADATA_FILES = ("timestamp.json", "snapshot.json")
 USER_AGENT = "DeebotNexusLocalOtaMirror/1.0"
 GITHUB_PROXY_DOMAINS = ("github.com", "github.io", "githubusercontent.com")
+ED25519_P = 2**255 - 19
+ED25519_Q = 2**252 + 27742317777372353535851937790883648493
+ED25519_D = -121665 * pow(121666, ED25519_P - 2, ED25519_P) % ED25519_P
+ED25519_I = pow(2, (ED25519_P - 1) // 4, ED25519_P)
+ED25519_BASE_Y = 4 * pow(5, ED25519_P - 2, ED25519_P) % ED25519_P
 
 
 class DownloadRef:
@@ -576,7 +581,6 @@ def apply_config(args):
     apply_string_config(args, config, "github_proxy_username", "")
     apply_string_config(args, config, "github_proxy_password", "")
     apply_string_config(args, config, "metadata_public_key_file", "")
-    apply_string_config(args, config, "ota_center_bin", "ota-center")
     apply_int_config(args, config, "port", 18080)
     apply_int_config(args, config, "timeout", 30)
     if hasattr(args, "bind"):
@@ -738,7 +742,7 @@ def run_polling_mirror(args):
     cache_dir = resolve_cache_dir(args.cache_dir)
     base_url = public_base_url(args)
     github_proxy = resolve_github_proxy(args)
-    metadata_verifier = build_metadata_verifier(args.metadata_public_key_file, args.ota_center_bin)
+    metadata_verifier = build_metadata_verifier(args.metadata_public_key_file)
     sync_lock = threading.Lock()
     stop_event = threading.Event()
 
@@ -806,7 +810,7 @@ def command_sync(args):
         public_base_url=public_base_url(args),
         timeout=args.timeout,
         github_proxy=github_proxy,
-        metadata_verifier=build_metadata_verifier(args.metadata_public_key_file, args.ota_center_bin),
+        metadata_verifier=build_metadata_verifier(args.metadata_public_key_file),
     )
     print(
         "synced %s metadata files, %s assets (%s downloaded, %s reused)"
@@ -833,49 +837,176 @@ def positive_int(value):
     return parsed
 
 
-def build_metadata_verifier(metadata_public_key_file, ota_center_bin="ota-center"):
+def build_metadata_verifier(metadata_public_key_file):
     if not metadata_public_key_file:
         return None
-    if not ota_center_bin:
-        ota_center_bin = "ota-center"
+    public_key = decode_hex_or_base64_text(
+        Path(metadata_public_key_file).read_text(encoding="utf-8"),
+        "metadata public key",
+    )
+    if len(public_key) != 32:
+        raise RuntimeError("metadata public key must be 32 bytes")
 
     def verify(name, text, signature):
-        with tempfile.NamedTemporaryFile(
-            mode="w",
-            encoding="utf-8",
-            suffix=".json",
-            delete=False,
-        ) as handle:
-            handle.write(text)
-            temp_path = handle.name
+        del signature
         try:
-            result = subprocess.run(
-                [
-                    ota_center_bin,
-                    "verify-metadata",
-                    "--file",
-                    temp_path,
-                    "--public-key-file",
-                    metadata_public_key_file,
-                ],
-                capture_output=True,
-                text=True,
-                check=False,
+            value = json.loads(text)
+            if not isinstance(value, dict):
+                raise RuntimeError("metadata must be a JSON object")
+            signature_text = value.get("signature")
+            if not isinstance(signature_text, str) or not signature_text:
+                raise RuntimeError("metadata signature is required")
+            signature_bytes = decode_hex_or_base64_text(signature_text, "metadata signature")
+            if len(signature_bytes) != 64:
+                raise RuntimeError("metadata signature must be 64 bytes")
+            verify_ed25519(
+                canonical_json_bytes(strip_signature_fields(value)),
+                signature_bytes,
+                public_key,
             )
         except Exception as error:
             raise RuntimeError("failed to verify metadata %s: %s" % (name, error)) from error
-        finally:
-            try:
-                os.unlink(temp_path)
-            except FileNotFoundError:
-                pass
-        if result.returncode != 0:
-            raise RuntimeError(
-                "failed to verify metadata %s: exit %s\nstdout: %s\nstderr: %s"
-                % (name, result.returncode, result.stdout, result.stderr),
-            )
 
     return verify
+
+
+def decode_hex_or_base64_text(value, label):
+    text = "".join(value.split())
+    if not text:
+        raise RuntimeError("%s is empty" % label)
+    try:
+        if len(text) % 2 == 0:
+            return bytes.fromhex(text)
+    except ValueError:
+        pass
+    try:
+        return base64.b64decode(text, validate=True)
+    except binascii.Error as error:
+        raise RuntimeError("%s must be hex or base64" % label) from error
+
+
+def strip_signature_fields(value):
+    if isinstance(value, list):
+        return [strip_signature_fields(item) for item in value]
+    if isinstance(value, dict):
+        return {
+            key: strip_signature_fields(child)
+            for key, child in value.items()
+            if key != "signature"
+        }
+    return value
+
+
+def canonical_json_bytes(value):
+    return canonical_json(value).encode("utf-8")
+
+
+def canonical_json(value):
+    if isinstance(value, list):
+        return "[" + ",".join(canonical_json(item) for item in value) + "]"
+    if isinstance(value, dict):
+        return "{" + ",".join(
+            json.dumps(key, ensure_ascii=False, separators=(",", ":"))
+            + ":"
+            + canonical_json(value[key])
+            for key in sorted(value.keys())
+        ) + "}"
+    if isinstance(value, float) and not math_is_finite(value):
+        raise RuntimeError("unsupported value for canonical JSON: non-finite number")
+    return json.dumps(value, ensure_ascii=False, separators=(",", ":"), allow_nan=False)
+
+
+def math_is_finite(value):
+    return value == value and value not in (float("inf"), float("-inf"))
+
+
+def verify_ed25519(message, signature, public_key):
+    if len(signature) != 64:
+        raise RuntimeError("metadata signature must be 64 bytes")
+    if len(public_key) != 32:
+        raise RuntimeError("metadata public key must be 32 bytes")
+    r_bytes = signature[:32]
+    s = int.from_bytes(signature[32:], "little")
+    if s >= ED25519_Q:
+        raise RuntimeError("metadata signature scalar is out of range")
+
+    try:
+        a_point = ed25519_decode_point(public_key)
+        r_point = ed25519_decode_point(r_bytes)
+    except RuntimeError as error:
+        raise RuntimeError("decode metadata signature point: %s" % error) from error
+
+    h = int.from_bytes(
+        hashlib.sha512(r_bytes + public_key + message).digest(),
+        "little",
+    ) % ED25519_Q
+    left = ed25519_scalar_mult(ed25519_base_point(), s)
+    right = ed25519_point_add(r_point, ed25519_scalar_mult(a_point, h))
+    if left != right:
+        raise RuntimeError("verify metadata signature")
+
+
+def ed25519_base_point():
+    return (ed25519_recover_x(ED25519_BASE_Y, 0), ED25519_BASE_Y)
+
+
+def ed25519_decode_point(encoded):
+    if len(encoded) != 32:
+        raise RuntimeError("encoded point must be 32 bytes")
+    y = int.from_bytes(encoded, "little") & ((1 << 255) - 1)
+    sign = encoded[31] >> 7
+    if y >= ED25519_P:
+        raise RuntimeError("encoded point y is out of range")
+    x = ed25519_recover_x(y, sign)
+    if not ed25519_is_on_curve((x, y)):
+        raise RuntimeError("encoded point is not on curve")
+    return (x, y)
+
+
+def ed25519_recover_x(y, sign):
+    y2 = y * y % ED25519_P
+    numerator = (y2 - 1) % ED25519_P
+    denominator = (ED25519_D * y2 + 1) % ED25519_P
+    x2 = numerator * pow(denominator, ED25519_P - 2, ED25519_P) % ED25519_P
+    x = pow(x2, (ED25519_P + 3) // 8, ED25519_P)
+    if (x * x - x2) % ED25519_P != 0:
+        x = x * ED25519_I % ED25519_P
+    if (x * x - x2) % ED25519_P != 0:
+        raise RuntimeError("invalid point x coordinate")
+    if (x & 1) != sign:
+        x = ED25519_P - x
+    return x
+
+
+def ed25519_is_on_curve(point):
+    x, y = point
+    return (
+        (y * y - x * x - 1 - ED25519_D * x * x * y * y)
+        % ED25519_P
+        == 0
+    )
+
+
+def ed25519_point_add(left, right):
+    x1, y1 = left
+    x2, y2 = right
+    x1x2 = x1 * x2 % ED25519_P
+    y1y2 = y1 * y2 % ED25519_P
+    dxxyy = ED25519_D * x1x2 * y1y2 % ED25519_P
+    x3 = (x1 * y2 + x2 * y1) * pow(1 + dxxyy, ED25519_P - 2, ED25519_P)
+    y3 = (y1y2 + x1x2) * pow(1 - dxxyy, ED25519_P - 2, ED25519_P)
+    return (x3 % ED25519_P, y3 % ED25519_P)
+
+
+def ed25519_scalar_mult(point, scalar):
+    result = (0, 1)
+    addend = point
+    while scalar:
+        if scalar & 1:
+            result = ed25519_point_add(result, addend)
+        addend = ed25519_point_add(addend, addend)
+        scalar >>= 1
+    return result
 
 
 def add_common_sync_args(parser):
@@ -922,12 +1053,7 @@ def add_common_sync_args(parser):
     parser.add_argument(
         "--metadata-public-key-file",
         default=None,
-        help="public key file used by ota-center verify-metadata for v2 metadata",
-    )
-    parser.add_argument(
-        "--ota-center-bin",
-        default=None,
-        help="ota-center executable used for v2 metadata verification (default: ota-center)",
+        help="public key file used to verify v2 metadata signatures",
     )
     parser.add_argument("--port", type=positive_int, default=None, help="LAN HTTP port")
     parser.add_argument("--timeout", type=positive_int, default=None, help="network timeout in seconds")

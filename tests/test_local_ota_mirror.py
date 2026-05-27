@@ -133,19 +133,17 @@ class LocalOtaMirrorTests(unittest.TestCase):
 
             self.assertEqual(args.interval, 7)
 
-    def test_config_file_supplies_metadata_verifier_options(self):
+    def test_config_file_supplies_metadata_public_key(self):
         mirror = load_module()
 
         with tempfile.TemporaryDirectory() as temp_dir:
             root = pathlib.Path(temp_dir)
             public_key = root / "metadata.pub"
-            ota_center = root / "ota-center"
             config_path = root / "mirror-config.json"
             config_path.write_text(
                 json.dumps(
                     {
                         "metadata_public_key_file": str(public_key),
-                        "ota_center_bin": str(ota_center),
                     },
                 ),
                 encoding="utf-8",
@@ -156,44 +154,63 @@ class LocalOtaMirrorTests(unittest.TestCase):
             mirror.apply_config(args)
 
             self.assertEqual(args.metadata_public_key_file, str(public_key))
-            self.assertEqual(args.ota_center_bin, str(ota_center))
 
-    def test_build_metadata_verifier_invokes_ota_center(self):
+    def test_build_metadata_verifier_verifies_metadata_without_external_tool(self):
         mirror = load_module()
 
         with tempfile.TemporaryDirectory() as temp_dir:
             root = pathlib.Path(temp_dir)
             public_key = root / "metadata.pub"
-            public_key.write_text("test public key", encoding="utf-8")
-            log_path = root / "argv.json"
-            fake_ota_center = root / "fake-ota-center"
-            fake_ota_center.write_text(
-                "\n".join(
-                    [
-                        "#!/usr/bin/env python3",
-                        "import json",
-                        "import pathlib",
-                        "import sys",
-                        "args = sys.argv[1:]",
-                        "file_path = pathlib.Path(args[args.index('--file') + 1])",
-                        "pathlib.Path(%s).write_text(json.dumps({'argv': args, 'file_text': file_path.read_text(encoding='utf-8')}), encoding='utf-8')"
-                        % json.dumps(str(log_path)),
-                    ],
-                )
-                + "\n",
+            public_key.write_text(
+                "66cd608b928b88e50e0efeaa33faf1c43cefe07294b0b87e9fe0aba6a3cf7633",
                 encoding="utf-8",
             )
-            os.chmod(fake_ota_center, 0o755)
+            verifier = mirror.build_metadata_verifier(str(public_key))
+            metadata = json.dumps(
+                {
+                    "schemaVersion": 1,
+                    "kind": "deebotOtaTimestamp",
+                    "snapshotId": "20260523T000000Z-test",
+                    "signature": (
+                        "1c3ec1cabfc0cfb816707585a17b2bc5d3aebc38af95ddbbb2e349f3088d1c05"
+                        "d28a9056dee6332e3e1c514fd02a24ae8d29a4bab8bedc31c756b1d94fcf1208"
+                    ),
+                },
+            )
 
-            verifier = mirror.build_metadata_verifier(str(public_key), str(fake_ota_center))
-            verifier("timestamp.json", '{"signed": true}', "ignored-by-wrapper")
+            verifier("timestamp.json", metadata, "ignored-explicit-signature")
 
-            recorded = json.loads(log_path.read_text(encoding="utf-8"))
-            self.assertIn("verify-metadata", recorded["argv"])
-            self.assertIn("--file", recorded["argv"])
-            self.assertIn("--public-key-file", recorded["argv"])
-            self.assertIn(str(public_key), recorded["argv"])
-            self.assertEqual(recorded["file_text"], '{"signed": true}')
+            with self.assertRaisesRegex(RuntimeError, "verify metadata signature"):
+                verifier(
+                    "timestamp.json",
+                    metadata.replace("20260523T000000Z-test", "20260523T000000Z-tampered"),
+                    "ignored-explicit-signature",
+                )
+
+    def test_build_metadata_verifier_strips_nested_signatures_and_sorts_keys(self):
+        mirror = load_module()
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = pathlib.Path(temp_dir)
+            public_key = root / "metadata.pub"
+            public_key.write_text(
+                "31debe55d37c722768b137131caa6087080b2e0b60b94bd785d14575cfa498bc",
+                encoding="utf-8",
+            )
+            verifier = mirror.build_metadata_verifier(str(public_key))
+            metadata = (
+                '{"version":2,"targets":[{"signature":"ignored-target-signature",'
+                '"locations":[{"path":"assets/app.dn-ota","signature":"ignored-location-signature",'
+                '"kind":"snapshotMirror"},{"url":"https://example.com/app.dn-ota",'
+                '"kind":"githubRelease"}],"assetName":"app.dn-ota"}],'
+                '"signature":"332418eeddac27b6b2b6ebbfdccd0f1cdf5b8d34ea82f82dbfc3054aca1f8a9d'
+                '30e0e0e71ccc603f5365d80f4cc8ef13bdceae7b27fe8e019a28b9b8a582630e",'
+                '"snapshotId":"20260523T000000Z-test",'
+                '"metadata":[{"signature":"ignored-metadata-signature","name":"manifest.json"}],'
+                '"kind":"deebotOtaSnapshot"}'
+            )
+
+            verifier("snapshots/test/snapshot.json", metadata, "ignored-explicit-signature")
 
     def test_sync_requires_snapshot_timestamp_metadata(self):
         mirror = load_module()
