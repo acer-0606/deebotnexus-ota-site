@@ -110,12 +110,14 @@ def sync_v2_mirror(remote_base_url, cache_dir, public_base_url, timestamp, timeo
     }
 
     if snapshot_dir.exists():
-        if not reusable_v2_snapshot(
-            snapshot_dir,
-            state_metadata,
-            unique_refs,
-        ):
+        if not v2_snapshot_metadata_matches(snapshot_dir, state_metadata):
             raise ValueError("existing v2 snapshot %s does not match fetched metadata/assets" % snapshot_name)
+        repaired = repair_v2_snapshot_assets(
+            snapshot_dir,
+            unique_refs,
+            timeout,
+            github_proxy=github_proxy,
+        )
         write_v2_current_state(
             cache_dir,
             remote_base_url,
@@ -127,10 +129,10 @@ def sync_v2_mirror(remote_base_url, cache_dir, public_base_url, timestamp, timeo
         return SyncResult(
             metadata_count=len(state_metadata),
             asset_count=len(unique_refs),
-            download_count=0,
-            reused_count=len(unique_refs),
+            download_count=repaired["downloaded"],
+            reused_count=repaired["reused"],
             snapshot_name=snapshot_name,
-            changed=False,
+            changed=repaired["downloaded"] > 0,
         )
 
     if staging_dir.exists():
@@ -375,6 +377,16 @@ def digest_metadata(metadata):
 
 
 def reusable_v2_snapshot(snapshot_dir, metadata, refs):
+    if not v2_snapshot_metadata_matches(snapshot_dir, metadata):
+        return False
+    for ref in refs:
+        asset_path = snapshot_dir / "assets" / ref.asset_name
+        if not asset_matches(asset_path, ref):
+            return False
+    return True
+
+
+def v2_snapshot_metadata_matches(snapshot_dir, metadata):
     expected_names = set(metadata)
     stale_names = set(OPTIONAL_ROOT_METADATA_FILES) - expected_names
     stale_names.update(("latest.json", "manifest.json"))
@@ -392,12 +404,21 @@ def reusable_v2_snapshot(snapshot_dir, metadata, refs):
             return False
         if existing != expected:
             return False
-
-    for ref in refs:
-        asset_path = snapshot_dir / "assets" / ref.asset_name
-        if not asset_matches(asset_path, ref):
-            return False
     return True
+
+
+def repair_v2_snapshot_assets(snapshot_dir, refs, timeout, github_proxy=""):
+    downloaded = 0
+    reused = 0
+    assets_dir = snapshot_dir / "assets"
+    for ref in refs:
+        asset_path = assets_dir / ref.asset_name
+        if not asset_matches(asset_path, ref):
+            ensure_asset(ref, assets_dir, timeout, github_proxy=github_proxy)
+            downloaded += 1
+        else:
+            reused += 1
+    return {"downloaded": downloaded, "reused": reused}
 
 
 def write_v2_current_state(cache_dir, remote_base_url, public_base_url, metadata, refs, snapshot_name):
@@ -450,6 +471,7 @@ def ensure_asset(ref, assets_dir, timeout, github_proxy=""):
     if asset_matches(target, ref):
         return False
 
+    target.parent.mkdir(parents=True, exist_ok=True)
     tmp = target.with_name(target.name + ".tmp")
     try:
         digest, length = download_to_file(ref.url, tmp, timeout, github_proxy=github_proxy)

@@ -395,6 +395,40 @@ class LocalOtaMirrorTests(unittest.TestCase):
             self.assertEqual(second.download_count, 0)
             self.assertEqual(second.reused_count, 1)
 
+    def test_v2_resync_same_snapshot_repairs_missing_cached_asset(self):
+        mirror = load_module()
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = pathlib.Path(temp_dir)
+            remote = root / "remote"
+            remote.mkdir()
+            fixture = write_snapshot_remote(remote, snapshot_id="20260523T011000Z-v2test")
+
+            cache_dir = root / "cache"
+            first = mirror.sync_mirror(
+                remote_base_url=remote.resolve().as_uri(),
+                cache_dir=cache_dir,
+                public_base_url="http://192.168.1.20:18080",
+                timeout=2,
+                metadata_verifier=lambda name, text, signature: None,
+            )
+            cached_asset = cache_dir / "snapshots" / first.snapshot_name / "assets" / fixture["asset_name"]
+            cached_asset.unlink()
+
+            second = mirror.sync_mirror(
+                remote_base_url=remote.resolve().as_uri(),
+                cache_dir=cache_dir,
+                public_base_url="http://192.168.1.20:18080",
+                timeout=2,
+                metadata_verifier=lambda name, text, signature: None,
+            )
+
+            self.assertEqual(second.snapshot_name, fixture["snapshot_id"])
+            self.assertTrue(second.changed)
+            self.assertEqual(second.download_count, 1)
+            self.assertEqual(second.reused_count, 0)
+            self.assertEqual(cached_asset.read_bytes(), fixture["asset_bytes"])
+
     def test_v2_resync_same_snapshot_does_not_delete_existing_current_on_failure(self):
         mirror = load_module()
 
