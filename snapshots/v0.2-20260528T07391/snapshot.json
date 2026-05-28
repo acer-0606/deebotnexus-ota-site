@@ -1,0 +1,571 @@
+{
+  "schemaVersion": 1,
+  "kind": "deebotOtaSnapshot",
+  "snapshotId": "v0.2-20260528T07391",
+  "channel": "stable",
+  "version": 7,
+  "publishedAt": "2026-05-28T07:39:10.943Z",
+  "minimumHostVersion": "0.1.0",
+  "metadata": [],
+  "targets": [
+    {
+      "targetId": "plugin:darwin-aarch64:lds-2d-viewer:0.1.2",
+      "kind": "plugin",
+      "platform": "darwin-aarch64",
+      "id": "lds-2d-viewer",
+      "name": "LDS 实时查看器",
+      "version": "0.1.2",
+      "hostVersion": {
+        "min": "0.2.5-mac.1",
+        "max": null
+      },
+      "assetName": "sha256-ff802080041f-lds-2d-viewer-darwin-aarch64-0.1.2.dn-ota",
+      "sha256": "ff802080041f448d03c9d5d3293e5fb5c1c7bb2038cc8eb6513a8f48c39ef8ce",
+      "length": 311167,
+      "changelog": "DeebotNexus bundled plugin release for macOS.",
+      "requiresManualConfigReview": false,
+      "encryption": {
+        "format": "dn-ota",
+        "payloadRoot": "payloads/plugins/lds-2d-viewer",
+        "keyId": "plugin-ota-v1"
+      },
+      "locations": [
+        {
+          "kind": "githubRelease",
+          "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sha256-ff802080041f-lds-2d-viewer-darwin-aarch64-0.1.2.dn-ota"
+        },
+        {
+          "kind": "snapshotMirror",
+          "path": "assets/sha256-ff802080041f-lds-2d-viewer-darwin-aarch64-0.1.2.dn-ota"
+        }
+      ]
+    },
+    {
+      "targetId": "plugin:darwin-aarch64:lds-log-viewer:0.1.0",
+      "kind": "plugin",
+      "platform": "darwin-aarch64",
+      "id": "lds-log-viewer",
+      "name": "LDS 日志查看器",
+      "version": "0.1.0",
+      "hostVersion": {
+        "min": "0.2.5-mac.1",
+        "max": null
+      },
+      "assetName": "sha256-599e082c3129-lds-log-viewer-darwin-aarch64-0.1.0.dn-ota",
+      "sha256": "599e082c31294d89678fe405eae7856b66079c7497e1392970d8c056669cd5aa",
+      "length": 764170,
+      "changelog": "DeebotNexus bundled plugin release for macOS.",
+      "requiresManualConfigReview": false,
+      "encryption": {
+        "format": "dn-ota",
+        "payloadRoot": "payloads/plugins/lds-log-viewer",
+        "keyId": "plugin-ota-v1"
+      },
+      "locations": [
+        {
+          "kind": "githubRelease",
+          "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sha256-599e082c3129-lds-log-viewer-darwin-aarch64-0.1.0.dn-ota"
+        },
+        {
+          "kind": "snapshotMirror",
+          "path": "assets/sha256-599e082c3129-lds-log-viewer-darwin-aarch64-0.1.0.dn-ota"
+        }
+      ]
+    },
+    {
+      "targetId": "plugin:darwin-aarch64:sensor-3d-viewer:0.1.4",
+      "kind": "plugin",
+      "platform": "darwin-aarch64",
+      "id": "sensor-3d-viewer",
+      "name": "Sensor 3D Viewer",
+      "version": "0.1.4",
+      "hostVersion": {
+        "min": "0.2.5-mac.1",
+        "max": null
+      },
+      "assetName": "sha256-739b2338e082-sensor-3d-viewer-darwin-aarch64-0.1.4.dn-ota",
+      "sha256": "739b2338e0823935c8a30e12bf6dd11557565bb91fcf554bbb749f677bef6100",
+      "length": 572836,
+      "changelog": "DeebotNexus bundled plugin release for macOS.",
+      "requiresManualConfigReview": false,
+      "encryption": {
+        "format": "dn-ota",
+        "payloadRoot": "payloads/plugins/sensor-3d-viewer",
+        "keyId": "plugin-ota-v1"
+      },
+      "locations": [
+        {
+          "kind": "githubRelease",
+          "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sha256-739b2338e082-sensor-3d-viewer-darwin-aarch64-0.1.4.dn-ota"
+        },
+        {
+          "kind": "snapshotMirror",
+          "path": "assets/sha256-739b2338e082-sensor-3d-viewer-darwin-aarch64-0.1.4.dn-ota"
+        }
+      ]
+    },
+    {
+      "targetId": "plugin:darwin-aarch64:service-automation-workflow:0.1.2",
+      "kind": "plugin",
+      "platform": "darwin-aarch64",
+      "id": "service-automation-workflow",
+      "name": "Service Automation Workflow",
+      "version": "0.1.2",
+      "hostVersion": {
+        "min": "0.2.5-mac.1",
+        "max": null
+      },
+      "assetName": "sha256-d41734c84651-service-automation-workflow-darwin-aarch64-0.1.2.dn-ota",
+      "sha256": "d41734c84651cc8ad7d7b00a1dfe0b6544d30a441ff4e1c2210e17a485761496",
+      "length": 2801934,
+      "changelog": "DeebotNexus bundled plugin release for macOS.",
+      "requiresManualConfigReview": false,
+      "encryption": {
+        "format": "dn-ota",
+        "payloadRoot": "payloads/plugins/service-automation-workflow",
+        "keyId": "plugin-ota-v1"
+      },
+      "locations": [
+        {
+          "kind": "githubRelease",
+          "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sha256-d41734c84651-service-automation-workflow-darwin-aarch64-0.1.2.dn-ota"
+        },
+        {
+          "kind": "snapshotMirror",
+          "path": "assets/sha256-d41734c84651-service-automation-workflow-darwin-aarch64-0.1.2.dn-ota"
+        }
+      ]
+    },
+    {
+      "targetId": "plugin:windows-x86_64:lds-2d-viewer:0.1.2",
+      "kind": "plugin",
+      "platform": "windows-x86_64",
+      "id": "lds-2d-viewer",
+      "name": "LDS 实时查看器",
+      "version": "0.1.2",
+      "hostVersion": {
+        "min": "0.2.5-win.1",
+        "max": null
+      },
+      "assetName": "sha256-f02bfcd52541-lds-2d-viewer-windows-x86_64-0.1.2.dn-ota",
+      "sha256": "f02bfcd52541cd80f186d6c6dd1f5cfb96226bdf3476525d35b816451a9df61a",
+      "length": 311172,
+      "changelog": "DeebotNexus bundled plugin release for Windows.",
+      "requiresManualConfigReview": false,
+      "encryption": {
+        "format": "dn-ota",
+        "payloadRoot": "payloads/plugins/lds-2d-viewer",
+        "keyId": "plugin-ota-v1"
+      },
+      "locations": [
+        {
+          "kind": "githubRelease",
+          "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sha256-f02bfcd52541-lds-2d-viewer-windows-x86_64-0.1.2.dn-ota"
+        },
+        {
+          "kind": "snapshotMirror",
+          "path": "assets/sha256-f02bfcd52541-lds-2d-viewer-windows-x86_64-0.1.2.dn-ota"
+        }
+      ]
+    },
+    {
+      "targetId": "plugin:windows-x86_64:lds-log-viewer:0.1.0",
+      "kind": "plugin",
+      "platform": "windows-x86_64",
+      "id": "lds-log-viewer",
+      "name": "LDS 日志查看器",
+      "version": "0.1.0",
+      "hostVersion": {
+        "min": "0.2.5-win.1",
+        "max": null
+      },
+      "assetName": "sha256-b9d41f63e71b-lds-log-viewer-windows-x86_64-0.1.0.dn-ota",
+      "sha256": "b9d41f63e71b186d951a82c4d9215b6fef56a4e129763b36b381bc6c83f19a7b",
+      "length": 2072106,
+      "changelog": "DeebotNexus bundled plugin release for Windows.",
+      "requiresManualConfigReview": false,
+      "encryption": {
+        "format": "dn-ota",
+        "payloadRoot": "payloads/plugins/lds-log-viewer",
+        "keyId": "plugin-ota-v1"
+      },
+      "locations": [
+        {
+          "kind": "githubRelease",
+          "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sha256-b9d41f63e71b-lds-log-viewer-windows-x86_64-0.1.0.dn-ota"
+        },
+        {
+          "kind": "snapshotMirror",
+          "path": "assets/sha256-b9d41f63e71b-lds-log-viewer-windows-x86_64-0.1.0.dn-ota"
+        }
+      ]
+    },
+    {
+      "targetId": "plugin:windows-x86_64:sensor-3d-viewer:0.1.4",
+      "kind": "plugin",
+      "platform": "windows-x86_64",
+      "id": "sensor-3d-viewer",
+      "name": "Sensor 3D Viewer",
+      "version": "0.1.4",
+      "hostVersion": {
+        "min": "0.2.5-win.1",
+        "max": null
+      },
+      "assetName": "sha256-60b015de0c47-sensor-3d-viewer-windows-x86_64-0.1.4.dn-ota",
+      "sha256": "60b015de0c471fdc5eca2e34e1933eb35694607cc4920fcfb6fb5887c6c9c9b1",
+      "length": 572836,
+      "changelog": "DeebotNexus bundled plugin release for Windows.",
+      "requiresManualConfigReview": false,
+      "encryption": {
+        "format": "dn-ota",
+        "payloadRoot": "payloads/plugins/sensor-3d-viewer",
+        "keyId": "plugin-ota-v1"
+      },
+      "locations": [
+        {
+          "kind": "githubRelease",
+          "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sha256-60b015de0c47-sensor-3d-viewer-windows-x86_64-0.1.4.dn-ota"
+        },
+        {
+          "kind": "snapshotMirror",
+          "path": "assets/sha256-60b015de0c47-sensor-3d-viewer-windows-x86_64-0.1.4.dn-ota"
+        }
+      ]
+    },
+    {
+      "targetId": "plugin:windows-x86_64:service-automation-workflow:0.1.2",
+      "kind": "plugin",
+      "platform": "windows-x86_64",
+      "id": "service-automation-workflow",
+      "name": "Service Automation Workflow",
+      "version": "0.1.2",
+      "hostVersion": {
+        "min": "0.2.5-win.1",
+        "max": null
+      },
+      "assetName": "sha256-f49de674f20a-service-automation-workflow-windows-x86_64-0.1.2.dn-ota",
+      "sha256": "f49de674f20a3eb2c2d6f30e48bd3e0ef76bb5c9c4bf992d9af5d554d841c2b3",
+      "length": 4559151,
+      "changelog": "DeebotNexus bundled plugin release for Windows.",
+      "requiresManualConfigReview": false,
+      "encryption": {
+        "format": "dn-ota",
+        "payloadRoot": "payloads/plugins/service-automation-workflow",
+        "keyId": "plugin-ota-v1"
+      },
+      "locations": [
+        {
+          "kind": "githubRelease",
+          "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sha256-f49de674f20a-service-automation-workflow-windows-x86_64-0.1.2.dn-ota"
+        },
+        {
+          "kind": "snapshotMirror",
+          "path": "assets/sha256-f49de674f20a-service-automation-workflow-windows-x86_64-0.1.2.dn-ota"
+        }
+      ]
+    },
+    {
+      "targetId": "app:linux-x86_64:0.2.5-linux.1",
+      "kind": "app",
+      "platform": "linux-x86_64",
+      "version": "0.2.5-linux.1",
+      "assetName": "sha256-b6454df39e36-DeebotNexus-ubuntu.dn-ota",
+      "sha256": "b6454df39e360b1e2048811bdc2ba8c1bee6927d84e57d9a96082229dd73b25c",
+      "length": 93370257,
+      "payloadSha256": "b626ab735d65e11ae7175082b1ca0554845278fbc673d244aab8a69fbc686951",
+      "tauriSignature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTTNscW91TzFKR3NVdW9MbHVoZHdmSVdPSHNTSU1MVjlVcE1uL3NMYVVjUTU3TS8zckxIN0xRd1BoUnFFN25valpFdWxJOFU3dEZEcWNjU0x3RTNYOEFNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc5ODQ2OTA3CWZpbGU6RGVlYm90TmV4dXNfMC4yLjUtbGludXguMV9hbWQ2NC5BcHBJbWFnZQpkNFEzU005VXB4WWhybzdZN01VcVU4cTdGalF1NThNdnM4TnRaMGJEaUIrL3hBUjNLN2FHWm9VcFZ1eVA4TFBtSzFpMEI3VUU0Q3hxbUNDYmpxTkNDQT09Cg==",
+      "encryption": {
+        "format": "dn-ota",
+        "payloadPath": "payloads/DeebotNexus_0.2.5-linux.1_amd64.AppImage",
+        "keyId": "main-app-ota-v1"
+      },
+      "locations": [
+        {
+          "kind": "githubRelease",
+          "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sha256-b6454df39e36-DeebotNexus-ubuntu.dn-ota"
+        },
+        {
+          "kind": "snapshotMirror",
+          "path": "assets/sha256-b6454df39e36-DeebotNexus-ubuntu.dn-ota"
+        }
+      ]
+    },
+    {
+      "targetId": "plugin:linux-x86_64:lds-2d-viewer:0.1.2",
+      "kind": "plugin",
+      "platform": "linux-x86_64",
+      "id": "lds-2d-viewer",
+      "name": "LDS 实时查看器",
+      "version": "0.1.2",
+      "hostVersion": {
+        "min": "0.2.5-linux.1",
+        "max": null
+      },
+      "assetName": "sha256-787787105e18-lds-2d-viewer-linux-x86_64-0.1.2.dn-ota",
+      "sha256": "787787105e1815b72eeab70b2f7ffe98f9d296b4400d1632db37adc8f40e531a",
+      "length": 311169,
+      "changelog": "DeebotNexus bundled plugin release for Ubuntu.",
+      "requiresManualConfigReview": false,
+      "encryption": {
+        "format": "dn-ota",
+        "payloadRoot": "payloads/plugins/lds-2d-viewer",
+        "keyId": "plugin-ota-v1"
+      },
+      "locations": [
+        {
+          "kind": "githubRelease",
+          "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sha256-787787105e18-lds-2d-viewer-linux-x86_64-0.1.2.dn-ota"
+        },
+        {
+          "kind": "snapshotMirror",
+          "path": "assets/sha256-787787105e18-lds-2d-viewer-linux-x86_64-0.1.2.dn-ota"
+        }
+      ]
+    },
+    {
+      "targetId": "plugin:linux-x86_64:lds-log-viewer:0.1.0",
+      "kind": "plugin",
+      "platform": "linux-x86_64",
+      "id": "lds-log-viewer",
+      "name": "LDS 日志查看器",
+      "version": "0.1.0",
+      "hostVersion": {
+        "min": "0.2.5-linux.1",
+        "max": null
+      },
+      "assetName": "sha256-915ccf80c566-lds-log-viewer-linux-x86_64-0.1.0.dn-ota",
+      "sha256": "915ccf80c566d41518c238c94f5e9d880ae2c339509d48e85bb3e3fc64f0622a",
+      "length": 860127,
+      "changelog": "DeebotNexus bundled plugin release for Ubuntu.",
+      "requiresManualConfigReview": false,
+      "encryption": {
+        "format": "dn-ota",
+        "payloadRoot": "payloads/plugins/lds-log-viewer",
+        "keyId": "plugin-ota-v1"
+      },
+      "locations": [
+        {
+          "kind": "githubRelease",
+          "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sha256-915ccf80c566-lds-log-viewer-linux-x86_64-0.1.0.dn-ota"
+        },
+        {
+          "kind": "snapshotMirror",
+          "path": "assets/sha256-915ccf80c566-lds-log-viewer-linux-x86_64-0.1.0.dn-ota"
+        }
+      ]
+    },
+    {
+      "targetId": "plugin:linux-x86_64:sensor-3d-viewer:0.1.4",
+      "kind": "plugin",
+      "platform": "linux-x86_64",
+      "id": "sensor-3d-viewer",
+      "name": "Sensor 3D Viewer",
+      "version": "0.1.4",
+      "hostVersion": {
+        "min": "0.2.5-linux.1",
+        "max": null
+      },
+      "assetName": "sha256-466dc38078b2-sensor-3d-viewer-linux-x86_64-0.1.4.dn-ota",
+      "sha256": "466dc38078b22fb578821e9a6230292695bed815b96a634db585d0eb9229e61f",
+      "length": 572832,
+      "changelog": "DeebotNexus bundled plugin release for Ubuntu.",
+      "requiresManualConfigReview": false,
+      "encryption": {
+        "format": "dn-ota",
+        "payloadRoot": "payloads/plugins/sensor-3d-viewer",
+        "keyId": "plugin-ota-v1"
+      },
+      "locations": [
+        {
+          "kind": "githubRelease",
+          "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sha256-466dc38078b2-sensor-3d-viewer-linux-x86_64-0.1.4.dn-ota"
+        },
+        {
+          "kind": "snapshotMirror",
+          "path": "assets/sha256-466dc38078b2-sensor-3d-viewer-linux-x86_64-0.1.4.dn-ota"
+        }
+      ]
+    },
+    {
+      "targetId": "plugin:linux-x86_64:service-automation-workflow:0.1.2",
+      "kind": "plugin",
+      "platform": "linux-x86_64",
+      "id": "service-automation-workflow",
+      "name": "Service Automation Workflow",
+      "version": "0.1.2",
+      "hostVersion": {
+        "min": "0.2.5-linux.1",
+        "max": null
+      },
+      "assetName": "sha256-ddca7c94d925-service-automation-workflow-linux-x86_64-0.1.2.dn-ota",
+      "sha256": "ddca7c94d925dd484af4654f014fdddb3b29c00dac0de692bb75c207ca61e5c7",
+      "length": 3070618,
+      "changelog": "DeebotNexus bundled plugin release for Ubuntu.",
+      "requiresManualConfigReview": false,
+      "encryption": {
+        "format": "dn-ota",
+        "payloadRoot": "payloads/plugins/service-automation-workflow",
+        "keyId": "plugin-ota-v1"
+      },
+      "locations": [
+        {
+          "kind": "githubRelease",
+          "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sha256-ddca7c94d925-service-automation-workflow-linux-x86_64-0.1.2.dn-ota"
+        },
+        {
+          "kind": "snapshotMirror",
+          "path": "assets/sha256-ddca7c94d925-service-automation-workflow-linux-x86_64-0.1.2.dn-ota"
+        }
+      ]
+    },
+    {
+      "targetId": "plugin:darwin-aarch64:imu-wheel-viewer:0.1.3",
+      "kind": "plugin",
+      "platform": "darwin-aarch64",
+      "id": "imu-wheel-viewer",
+      "name": "IMU/Wheel 分析器",
+      "version": "0.1.3",
+      "hostVersion": {
+        "min": "0.2.5-mac.4",
+        "max": null
+      },
+      "assetName": "sha256-5c9f1ff0048b-imu-wheel-viewer-darwin-aarch64-0.1.3.dn-ota",
+      "sha256": "5c9f1ff0048b82edf83de8fbe1d05533fd8c78f61374b802e1358413f4836e76",
+      "length": 37760,
+      "changelog": "imu-wheel-viewer 0.1.3 fixes offline IMU/Wheel log date alignment, binary parsing, and large-log navigation performance.",
+      "requiresManualConfigReview": false,
+      "encryption": {
+        "format": "dn-ota",
+        "payloadRoot": "payloads/plugins/imu-wheel-viewer",
+        "keyId": "plugin-ota-v1"
+      },
+      "locations": [
+        {
+          "kind": "githubRelease",
+          "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sha256-5c9f1ff0048b-imu-wheel-viewer-darwin-aarch64-0.1.3.dn-ota"
+        },
+        {
+          "kind": "snapshotMirror",
+          "path": "assets/sha256-5c9f1ff0048b-imu-wheel-viewer-darwin-aarch64-0.1.3.dn-ota"
+        }
+      ]
+    },
+    {
+      "targetId": "plugin:windows-x86_64:imu-wheel-viewer:0.1.3",
+      "kind": "plugin",
+      "platform": "windows-x86_64",
+      "id": "imu-wheel-viewer",
+      "name": "IMU/Wheel 分析器",
+      "version": "0.1.3",
+      "hostVersion": {
+        "min": "0.2.5-win.3",
+        "max": null
+      },
+      "assetName": "sha256-2f2dc7eca4d3-imu-wheel-viewer-windows-x86_64-0.1.3.dn-ota",
+      "sha256": "2f2dc7eca4d398994a8738c5e5ece8d6959ec3eda2d7f8eb0245e432b3eb6ac9",
+      "length": 37761,
+      "changelog": "imu-wheel-viewer 0.1.3 fixes offline IMU/Wheel log date alignment, binary parsing, and large-log navigation performance.",
+      "requiresManualConfigReview": false,
+      "encryption": {
+        "format": "dn-ota",
+        "payloadRoot": "payloads/plugins/imu-wheel-viewer",
+        "keyId": "plugin-ota-v1"
+      },
+      "locations": [
+        {
+          "kind": "githubRelease",
+          "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sha256-2f2dc7eca4d3-imu-wheel-viewer-windows-x86_64-0.1.3.dn-ota"
+        },
+        {
+          "kind": "snapshotMirror",
+          "path": "assets/sha256-2f2dc7eca4d3-imu-wheel-viewer-windows-x86_64-0.1.3.dn-ota"
+        }
+      ]
+    },
+    {
+      "targetId": "plugin:linux-x86_64:imu-wheel-viewer:0.1.3",
+      "kind": "plugin",
+      "platform": "linux-x86_64",
+      "id": "imu-wheel-viewer",
+      "name": "IMU/Wheel 分析器",
+      "version": "0.1.3",
+      "hostVersion": {
+        "min": "0.2.5-linux.2",
+        "max": null
+      },
+      "assetName": "sha256-36732572a027-imu-wheel-viewer-linux-x86_64-0.1.3.dn-ota",
+      "sha256": "36732572a027c92b5c4b9a129096c7f1c25883f508a017b4515538889e2349f5",
+      "length": 37760,
+      "changelog": "imu-wheel-viewer 0.1.3 fixes offline IMU/Wheel log date alignment, binary parsing, and large-log navigation performance.",
+      "requiresManualConfigReview": false,
+      "encryption": {
+        "format": "dn-ota",
+        "payloadRoot": "payloads/plugins/imu-wheel-viewer",
+        "keyId": "plugin-ota-v1"
+      },
+      "locations": [
+        {
+          "kind": "githubRelease",
+          "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sha256-36732572a027-imu-wheel-viewer-linux-x86_64-0.1.3.dn-ota"
+        },
+        {
+          "kind": "snapshotMirror",
+          "path": "assets/sha256-36732572a027-imu-wheel-viewer-linux-x86_64-0.1.3.dn-ota"
+        }
+      ]
+    },
+    {
+      "targetId": "app:darwin-aarch64:0.2.5-mac.6",
+      "kind": "app",
+      "platform": "darwin-aarch64",
+      "version": "0.2.5-mac.6",
+      "assetName": "sha256-794c913e47cb-DeebotNexus-mac.dn-ota",
+      "sha256": "794c913e47cbff3af813875a4a61057bb57268292fc1ecafc189840a1f16699e",
+      "length": 12721227,
+      "payloadSha256": "3d514c0c0fe530d58143c86bd18fbe756391a8ab23e92838efecefb7ade6adfe",
+      "tauriSignature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTTBjcmhKbzdnVnZwVE01OUw1QXBxWEtnUmNFTjlQVWtSbkZ6WWhoZkFOaVBkWHBOWE0xMnJKczNDa0FzSTlNbVpIT2tpWCszWGY4bU1TaG9oMWFQcUF3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc5OTM5Mjk0CWZpbGU6RGVlYm90TmV4dXMuYXBwLnRhci5negpqbGhTZUZYRGMxczJhbThia0tPeWppbzEvcU1GVFBINlpQRXlPNDEwODNsRGZsaVlMRlB5OHppcURROStDYWxPMWpCQWN5MHBnWk53eFVFeWU1dldEZz09Cg==",
+      "encryption": {
+        "format": "dn-ota",
+        "payloadPath": "payloads/DeebotNexus.app.tar.gz",
+        "keyId": "main-app-ota-v1"
+      },
+      "locations": [
+        {
+          "kind": "snapshotMirror",
+          "path": "assets/sha256-794c913e47cb-DeebotNexus-mac.dn-ota"
+        },
+        {
+          "kind": "githubRelease",
+          "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sha256-794c913e47cb-DeebotNexus-mac.dn-ota"
+        }
+      ]
+    },
+    {
+      "targetId": "app:windows-x86_64:0.2.5-win.5",
+      "kind": "app",
+      "platform": "windows-x86_64",
+      "version": "0.2.5-win.5",
+      "assetName": "sha256-9e062a374035-DeebotNexus-windows.dn-ota",
+      "sha256": "9e062a3740351fa906f3c56f1b957413105dec601692ff909a0bfd1bfcc704c2",
+      "length": 24569536,
+      "payloadSha256": "b4340e59c1c64a27b3cd33218ecd7c0e3b2ade5d951cd14f89800e681b646c74",
+      "tauriSignature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTelFpK2diWXIxTS9lUjVITFhiVFlZRDhSanRZTm1YbTBjREkvQkM5WTRnaE5RRFRYMk15bmg3eFZ5eTI2TU1iQkdMMmlPU2hFdWlvMGtuZld2NFVCRkEvR0JDS05IS1FJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc5OTM5NTY2CWZpbGU6RGVlYm90TmV4dXMtbWFpbi13aW5kb3dzLXg4Nl82NC0wLjIuNS13aW4uNS1zZXR1cC5leGUKT3I2UVhtRytTamIxeUxkWVpoSFdiZ3FrUVdaS1QrVS83VUJ1Y3ZYUU9sUUVJbm5JUEpHSW5IYU5CQUFWWHovTTN2WEJSWHd4dlNLZXdBckdsODJqRGc9PQo=",
+      "encryption": {
+        "format": "dn-ota",
+        "payloadPath": "payloads/DeebotNexus-main-windows-x86_64-0.2.5-win.5-setup.exe",
+        "keyId": "main-app-ota-v1"
+      },
+      "locations": [
+        {
+          "kind": "snapshotMirror",
+          "path": "assets/sha256-9e062a374035-DeebotNexus-windows.dn-ota"
+        },
+        {
+          "kind": "githubRelease",
+          "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sha256-9e062a374035-DeebotNexus-windows.dn-ota"
+        }
+      ]
+    }
+  ],
+  "signature": "1da121c345e613915e88c5ac9c41be91d53bd1e7289c6e70e464beab5b3f1e120c1a4fc02393ec9201debee624e07dcc2a0c559f65c024cc786db0135c53eb0c"
+}
