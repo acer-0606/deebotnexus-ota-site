@@ -89,6 +89,34 @@ def write_snapshot_remote(remote, snapshot_id="20260523T000000Z-v2test", target_
     }
 
 
+def write_connect_tools_pointer(remote, package_bytes=b"connect tools ota package"):
+    package_sha = hashlib.sha256(package_bytes).hexdigest()
+    package_name = "connect-tools-configs-2026.05.23.1.dn-ota"
+    package_path = remote / package_name
+    package_path.write_bytes(package_bytes)
+    pointer = {
+        "schemaVersion": 1,
+        "bundleId": "connect-tools-configs",
+        "name": "Connect Tools Product Configs",
+        "version": "2026.05.23.1",
+        "itemCount": 14,
+        "url": package_path.resolve().as_uri(),
+        "sha256": package_sha,
+        "publishedAt": "2026-05-23T00:00:00Z",
+    }
+    (remote / "connect-tools-configs.json").write_text(
+        json.dumps(pointer),
+        encoding="utf-8",
+    )
+    return {
+        "pointer": pointer,
+        "package_name": package_name,
+        "package_bytes": package_bytes,
+        "sha256": package_sha,
+        "local_asset_name": f"sha256-{package_sha[:12]}-{package_name}",
+    }
+
+
 class LocalOtaMirrorTests(unittest.TestCase):
     def test_config_file_supplies_interval_and_github_proxy(self):
         mirror = load_module()
@@ -301,17 +329,7 @@ class LocalOtaMirrorTests(unittest.TestCase):
             remote = root / "remote"
             remote.mkdir()
             fixture = write_snapshot_remote(remote)
-            connect_tools = {
-                "schemaVersion": 1,
-                "bundleId": "connect-tools-configs",
-                "version": "2026.05.23.1",
-                "url": "https://github.com/example/release/connect-tools-configs.dn-ota",
-                "sha256": "a" * 64,
-            }
-            (remote / "connect-tools-configs.json").write_text(
-                json.dumps(connect_tools),
-                encoding="utf-8",
-            )
+            connect_tools = write_connect_tools_pointer(remote)
 
             verified = []
             result = mirror.sync_mirror(
@@ -324,8 +342,8 @@ class LocalOtaMirrorTests(unittest.TestCase):
 
             self.assertEqual(result.snapshot_name, fixture["snapshot_id"])
             self.assertEqual(result.metadata_count, 3)
-            self.assertEqual(result.asset_count, 1)
-            self.assertEqual(result.download_count, 1)
+            self.assertEqual(result.asset_count, 2)
+            self.assertEqual(result.download_count, 2)
             self.assertEqual(
                 verified,
                 [
@@ -349,11 +367,15 @@ class LocalOtaMirrorTests(unittest.TestCase):
             )
             self.assertEqual(
                 json.loads((snapshot_dir / "connect-tools-configs.json").read_text(encoding="utf-8")),
-                connect_tools,
+                connect_tools["pointer"],
             )
             self.assertEqual(
                 (snapshot_dir / "assets" / fixture["asset_name"]).read_bytes(),
                 fixture["asset_bytes"],
+            )
+            self.assertEqual(
+                (snapshot_dir / "assets" / connect_tools["local_asset_name"]).read_bytes(),
+                connect_tools["package_bytes"],
             )
             self.assertFalse((snapshot_dir / "latest.json").exists())
             self.assertFalse((snapshot_dir / "manifest.json").exists())
@@ -558,6 +580,49 @@ class LocalOtaMirrorTests(unittest.TestCase):
                 with self.assertRaises(urllib.error.HTTPError) as error:
                     urllib.request.urlopen(f"{base_url}/connect-tools-configs.json", timeout=2)
                 self.assertEqual(error.exception.code, 404)
+            finally:
+                server.shutdown()
+                server.server_close()
+                thread.join(timeout=2)
+
+    def test_serve_mirror_rewrites_connect_tools_pointer_to_local_asset(self):
+        mirror = load_module()
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = pathlib.Path(temp_dir)
+            remote = root / "remote"
+            remote.mkdir()
+            fixture = write_snapshot_remote(remote, snapshot_id="20260523T040000Z-v2test")
+            connect_tools = write_connect_tools_pointer(remote)
+
+            cache_dir = root / "cache"
+            result = mirror.sync_mirror(
+                remote_base_url=remote.resolve().as_uri(),
+                cache_dir=cache_dir,
+                public_base_url="http://127.0.0.1:18080",
+                timeout=2,
+                metadata_verifier=lambda name, text, signature: None,
+            )
+
+            server = mirror.serve_mirror(cache_dir, "127.0.0.1", 0)
+            thread = threading.Thread(target=server.serve_forever, daemon=True)
+            thread.start()
+            try:
+                base_url = f"http://127.0.0.1:{server.server_port}"
+                with urllib.request.urlopen(f"{base_url}/connect-tools-configs.json", timeout=2) as response:
+                    served_pointer = json.loads(response.read().decode("utf-8"))
+
+                expected_url = (
+                    f"{base_url}/snapshots/{fixture['snapshot_id']}/assets/"
+                    f"{connect_tools['local_asset_name']}"
+                )
+                self.assertEqual(result.snapshot_name, fixture["snapshot_id"])
+                self.assertEqual(served_pointer["url"], expected_url)
+                self.assertEqual(served_pointer["sha256"], connect_tools["sha256"])
+
+                with urllib.request.urlopen(served_pointer["url"], timeout=2) as response:
+                    served_package = response.read()
+                self.assertEqual(served_package, connect_tools["package_bytes"])
             finally:
                 server.shutdown()
                 server.server_close()

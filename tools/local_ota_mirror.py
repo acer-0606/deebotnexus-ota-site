@@ -6,6 +6,7 @@ import base64
 import binascii
 import hashlib
 import http.server
+import io
 import json
 import os
 import posixpath
@@ -94,6 +95,8 @@ def sync_v2_mirror(remote_base_url, cache_dir, public_base_url, timestamp, timeo
 
     optional_metadata = fetch_optional_root_metadata(remote_base_url, timeout, github_proxy=github_proxy)
     refs_by_url = collect_v2_download_refs(snapshot["value"])
+    for ref in collect_optional_root_download_refs(optional_metadata).values():
+        add_download_ref(refs_by_url, ref)
     unique_refs = unique_refs_by_asset(refs_by_url)
     public_base_url = public_base_url.rstrip("/")
 
@@ -275,6 +278,61 @@ def collect_v2_download_refs(snapshot):
     return refs_by_url
 
 
+def collect_optional_root_download_refs(optional_metadata):
+    refs_by_url = {}
+    pointer = optional_metadata.get("connect-tools-configs.json")
+    ref = connect_tools_pointer_download_ref(pointer)
+    if ref is not None:
+        add_download_ref(refs_by_url, ref)
+    return refs_by_url
+
+
+def add_download_ref(refs_by_url, ref):
+    existing = refs_by_url.get(ref.url)
+    if existing:
+        if existing.sha256 != ref.sha256:
+            raise ValueError("conflicting download metadata for %s" % ref.url)
+        if (
+            existing.length is not None
+            and ref.length is not None
+            and existing.length != ref.length
+        ):
+            raise ValueError("conflicting download length for %s" % ref.url)
+        return existing
+    refs_by_url[ref.url] = ref
+    return ref
+
+
+def connect_tools_pointer_download_ref(pointer):
+    if not isinstance(pointer, dict):
+        return None
+    url = pointer.get("url")
+    sha256 = pointer.get("sha256")
+    if not isinstance(url, str) or not url.strip():
+        return None
+    if not ota_url(url):
+        raise ValueError("connect tools OTA pointer URL does not end with .dn-ota: %s" % url)
+    if not is_sha256(sha256):
+        return None
+    url = url.strip()
+    sha256 = sha256.lower()
+    return DownloadRef(
+        url=url,
+        sha256=sha256,
+        asset_name=connect_tools_pointer_asset_name(url, sha256),
+    )
+
+
+def connect_tools_pointer_asset_name(url, sha256):
+    basename = urllib.parse.unquote(posixpath.basename(urllib.parse.urlparse(url).path))
+    if not valid_asset_name(basename):
+        raise ValueError("connect tools OTA pointer URL has invalid asset name: %s" % url)
+    prefix = "sha256-%s-" % sha256[:12]
+    if basename.startswith(prefix):
+        return basename
+    return prefix + basename
+
+
 def first_target_url(target):
     locations = target.get("locations")
     if not isinstance(locations, list):
@@ -367,7 +425,18 @@ def is_sha256(value):
 def unique_refs_by_asset(refs_by_url):
     refs_by_name = {}
     for ref in refs_by_url.values():
-        refs_by_name.setdefault(ref.asset_name, ref)
+        existing = refs_by_name.get(ref.asset_name)
+        if existing:
+            if existing.sha256 != ref.sha256:
+                raise ValueError("asset name collision for %s with different sha256 values" % ref.asset_name)
+            if (
+                existing.length is not None
+                and ref.length is not None
+                and existing.length != ref.length
+            ):
+                raise ValueError("asset name collision for %s with different lengths" % ref.asset_name)
+            continue
+        refs_by_name[ref.asset_name] = ref
     return list(refs_by_name.values())
 
 
@@ -706,6 +775,11 @@ def snapshot_path(cache_dir, snapshot_name):
 class OtaMirrorRequestHandler(http.server.SimpleHTTPRequestHandler):
     cache_dir = None
 
+    def send_head(self):
+        if self.is_root_connect_tools_pointer_request():
+            return self.send_connect_tools_pointer_head()
+        return super().send_head()
+
     def translate_path(self, path):
         path = path.split("?", 1)[0]
         path = path.split("#", 1)[0]
@@ -735,6 +809,40 @@ class OtaMirrorRequestHandler(http.server.SimpleHTTPRequestHandler):
 
         return str(not_found)
 
+    def is_root_connect_tools_pointer_request(self):
+        path = self.path.split("?", 1)[0]
+        path = path.split("#", 1)[0]
+        path = posixpath.normpath(urllib.parse.unquote(path))
+        parts = [part for part in path.split("/") if part and part not in (".", "..")]
+        return parts == ["connect-tools-configs.json"]
+
+    def send_connect_tools_pointer_head(self):
+        try:
+            snapshot_name = current_snapshot_name(self.cache_dir)
+            snapshot_dir = snapshot_path(self.cache_dir, snapshot_name)
+            pointer_path = snapshot_dir / "connect-tools-configs.json"
+            if not pointer_path.is_file():
+                self.send_error(404, "File not found")
+                return None
+            pointer = json.loads(pointer_path.read_text(encoding="utf-8"))
+            pointer = rewrite_connect_tools_pointer_for_serving(
+                pointer,
+                request_base_url(self),
+                snapshot_name,
+                snapshot_dir,
+            )
+            encoded = (json.dumps(pointer, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+        except Exception as error:
+            self.send_error(500, str(error))
+            return None
+
+        response = io.BytesIO(encoded)
+        self.send_response(200)
+        self.send_header("Content-Type", "application/json; charset=utf-8")
+        self.send_header("Content-Length", str(len(encoded)))
+        self.end_headers()
+        return response
+
     def end_headers(self):
         self.send_header("Access-Control-Allow-Origin", "*")
         if self.path.endswith(".json"):
@@ -752,6 +860,38 @@ def make_handler(cache_dir):
     Handler.cache_dir = Path(cache_dir)
 
     return Handler
+
+
+def rewrite_connect_tools_pointer_for_serving(pointer, base_url, snapshot_name, snapshot_dir):
+    if not isinstance(pointer, dict):
+        return pointer
+    ref = connect_tools_pointer_download_ref(pointer)
+    if ref is None:
+        return pointer
+
+    asset_path = Path(snapshot_dir) / "assets" / ref.asset_name
+    if not asset_matches(asset_path, ref):
+        raise RuntimeError("local connect tools OTA asset is missing or invalid: %s" % ref.asset_name)
+
+    rewritten = dict(pointer)
+    rewritten["url"] = local_snapshot_asset_url(base_url, snapshot_name, ref.asset_name)
+    return rewritten
+
+
+def request_base_url(handler):
+    host = handler.headers.get("Host")
+    if not host:
+        address, port = handler.server.server_address[:2]
+        host = "%s:%s" % (address, port)
+    return "http://%s" % host
+
+
+def local_snapshot_asset_url(base_url, snapshot_name, asset_name):
+    return "%s/snapshots/%s/assets/%s" % (
+        base_url.rstrip("/"),
+        urllib.parse.quote(snapshot_name, safe=""),
+        urllib.parse.quote(asset_name, safe=""),
+    )
 
 
 def serve_mirror(cache_dir, bind, port):
