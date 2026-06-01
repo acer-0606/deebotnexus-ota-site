@@ -568,7 +568,9 @@ class LocalOtaMirrorTests(unittest.TestCase):
                 ) as response:
                     served_asset = response.read()
 
-                self.assertEqual(served_timestamp, fixture["timestamp"])
+                expected_timestamp = dict(fixture["timestamp"])
+                expected_timestamp["site"] = {"kind": "mirror"}
+                self.assertEqual(served_timestamp, expected_timestamp)
                 self.assertEqual(served_snapshot, fixture["snapshot"])
                 self.assertEqual(served_asset, fixture["asset_bytes"])
                 with self.assertRaises(urllib.error.HTTPError) as error:

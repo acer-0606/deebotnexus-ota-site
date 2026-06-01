@@ -776,6 +776,8 @@ class OtaMirrorRequestHandler(http.server.SimpleHTTPRequestHandler):
     cache_dir = None
 
     def send_head(self):
+        if self.is_root_timestamp_request():
+            return self.send_timestamp_head()
         if self.is_root_connect_tools_pointer_request():
             return self.send_connect_tools_pointer_head()
         return super().send_head()
@@ -808,6 +810,35 @@ class OtaMirrorRequestHandler(http.server.SimpleHTTPRequestHandler):
             return str(Path(self.cache_dir) / "snapshots" / parts[1] / "assets" / parts[3])
 
         return str(not_found)
+
+    def is_root_timestamp_request(self):
+        path = self.path.split("?", 1)[0]
+        path = path.split("#", 1)[0]
+        path = posixpath.normpath(urllib.parse.unquote(path))
+        parts = [part for part in path.split("/") if part and part not in (".", "..")]
+        return parts == ["timestamp.json"]
+
+    def send_timestamp_head(self):
+        try:
+            snapshot_name = current_snapshot_name(self.cache_dir)
+            snapshot_dir = snapshot_path(self.cache_dir, snapshot_name)
+            timestamp_path = snapshot_dir / "timestamp.json"
+            if not timestamp_path.is_file():
+                self.send_error(404, "File not found")
+                return None
+            timestamp = json.loads(timestamp_path.read_text(encoding="utf-8"))
+            timestamp = rewrite_timestamp_for_mirror_serving(timestamp)
+            encoded = (json.dumps(timestamp, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+        except Exception as error:
+            self.send_error(500, str(error))
+            return None
+
+        response = io.BytesIO(encoded)
+        self.send_response(200)
+        self.send_header("Content-Type", "application/json; charset=utf-8")
+        self.send_header("Content-Length", str(len(encoded)))
+        self.end_headers()
+        return response
 
     def is_root_connect_tools_pointer_request(self):
         path = self.path.split("?", 1)[0]
@@ -875,6 +906,20 @@ def rewrite_connect_tools_pointer_for_serving(pointer, base_url, snapshot_name, 
 
     rewritten = dict(pointer)
     rewritten["url"] = local_snapshot_asset_url(base_url, snapshot_name, ref.asset_name)
+    return rewritten
+
+
+def rewrite_timestamp_for_mirror_serving(timestamp):
+    if not isinstance(timestamp, dict):
+        return timestamp
+    rewritten = dict(timestamp)
+    site = timestamp.get("site")
+    if isinstance(site, dict):
+        site = dict(site)
+    else:
+        site = {}
+    site["kind"] = "mirror"
+    rewritten["site"] = site
     return rewritten
 
 
