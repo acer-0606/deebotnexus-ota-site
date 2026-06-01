@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "bundleId": "connect-tools-configs",
   "name": "Connect Tools Product Configs",
-  "version": "2026.05.18.1",
-  "itemCount": 14,
-  "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/connect-tools-configs-2026.05.18.1.dn-ota",
-  "sha256": "57dc8e386b2060afd4b8cba725e9e7be47bc04ebdeb71502ed6294379998ca05",
-  "publishedAt": "2026-05-18T09:00:10Z"
+  "version": "2026.05.19.1",
+  "itemCount": 16,
+  "url": "https://github.com/acer-0606/deebotnexus-ota-site/releases/download/v0.2/sha256-e780a8689269-connect-tools-configs-2026.05.19.1.dn-ota",
+  "sha256": "e780a8689269b74ae0c0657f581ba72f7a82525baa89ed7f6152b8b6fbe7174f",
+  "publishedAt": "2026-06-01T08:29:57Z"
 }
