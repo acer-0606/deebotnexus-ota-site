@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "kind": "deebotOtaTimestamp",
   "channel": "stable",
-  "version": 21,
-  "snapshotId": "v0.2-20260803T03542",
-  "snapshotPath": "snapshots/v0.2-20260803T03542/snapshot.json",
-  "snapshotSha256": "fb955ad683d0e3a69e6e4539a232ccd886e546817970f8edb8c3d8b8a18710fc",
-  "snapshotLength": 23929,
-  "publishedAt": "2026-08-03T03:55:36.542Z",
-  "expiresAt": "2026-09-02T03:55:36.542Z",
-  "signature": "336e048d5a0516c9b48f159696d257990f595910d40753c1c1788648dbcbd2dc74a78325a3ea047203b2a165c02cc22ec00eb26259a45b03869e93ee38463605"
+  "version": 22,
+  "snapshotId": "v0.2-20260803T07445",
+  "snapshotPath": "snapshots/v0.2-20260803T07445/snapshot.json",
+  "snapshotSha256": "34aa4e486bd567b973c8c5902d7e31f45ee4ee09ea66862f3ea68b708e6a8e06",
+  "snapshotLength": 23997,
+  "publishedAt": "2026-08-03T07:44:58.368Z",
+  "expiresAt": "2026-09-02T07:44:58.368Z",
+  "signature": "ce7f39b079083c821b7e95e6e8403de18abf998b93bbe5dbe3ed7c3a0ea14f1e2db879c7d9a7bd1f912e028980371634f882c102df111710b012aacb3f00ee08"
 }
