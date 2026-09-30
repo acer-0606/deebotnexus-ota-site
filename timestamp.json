@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "kind": "deebotOtaTimestamp",
   "channel": "stable",
-  "version": 37,
-  "snapshotId": "v0.2-lds-pose-arrow-20260924T064331",
-  "snapshotPath": "snapshots/v0.2-lds-pose-arrow-20260924T064331/snapshot.json",
-  "snapshotSha256": "6e8e12127cba5737fa5d0760bbd28a5ad563e0c5d37e00ea3f5a11d20c58a0cf",
-  "snapshotLength": 38991,
-  "publishedAt": "2026-09-24T06:43:31.863Z",
-  "expiresAt": "2026-10-24T06:43:31.863Z",
-  "signature": "7449f3db77f49f5a5b88fe66b310b9dcda6df4e02711e6315f1f8d9896c023d8f53b1419f989ce28204f9dcf8fcaab745a57b316f40f7e43db0eba36ca998402"
+  "version": 38,
+  "snapshotId": "v0.2-medusa-mac-20260930T175941",
+  "snapshotPath": "snapshots/v0.2-medusa-mac-20260930T175941/snapshot.json",
+  "snapshotSha256": "0d05d9f4305ee872ffb0f2e128d9cfc5c6b8ff52798e5d88edf5e14abff4a0cb",
+  "snapshotLength": 39011,
+  "publishedAt": "2026-09-30T17:59:41.524Z",
+  "expiresAt": "2026-10-30T17:59:41.524Z",
+  "signature": "8ae5ed1dcc5a4c637c17e043f311cbb9f2060d9662618076b6b60b45b6370ba4a96d03acdf183e585c1278c31d5b0e77669900bee50bd772e5cdc0292c67a903"
 }
