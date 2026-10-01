@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "kind": "deebotOtaTimestamp",
   "channel": "stable",
-  "version": 38,
-  "snapshotId": "v0.2-medusa-mac-20260930T175941",
-  "snapshotPath": "snapshots/v0.2-medusa-mac-20260930T175941/snapshot.json",
-  "snapshotSha256": "0d05d9f4305ee872ffb0f2e128d9cfc5c6b8ff52798e5d88edf5e14abff4a0cb",
-  "snapshotLength": 39011,
-  "publishedAt": "2026-09-30T17:59:41.524Z",
-  "expiresAt": "2026-10-30T17:59:41.524Z",
-  "signature": "8ae5ed1dcc5a4c637c17e043f311cbb9f2060d9662618076b6b60b45b6370ba4a96d03acdf183e585c1278c31d5b0e77669900bee50bd772e5cdc0292c67a903"
+  "version": 39,
+  "snapshotId": "v0.2-wheel-control-20261001",
+  "snapshotPath": "snapshots/v0.2-wheel-control-20261001/snapshot.json",
+  "snapshotSha256": "99b59a1cdc8e8f102959a1f7cdc84f5002137a76c97819f9137e7a2506d494c6",
+  "snapshotLength": 39377,
+  "publishedAt": "2026-10-01T13:52:32.967Z",
+  "expiresAt": "2026-10-31T13:52:32.967Z",
+  "signature": "d8fa39608384366dabb746cdef0dbcfb87c6382d0e90c474144df86aee1fa4ab32d3b7a2548ffcc07638633905edb6d9ed25f5638c9ab863e8936189570f2c0c"
 }
