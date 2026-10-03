@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "kind": "deebotOtaTimestamp",
   "channel": "stable",
-  "version": 39,
-  "snapshotId": "v0.2-wheel-control-20261001",
-  "snapshotPath": "snapshots/v0.2-wheel-control-20261001/snapshot.json",
-  "snapshotSha256": "99b59a1cdc8e8f102959a1f7cdc84f5002137a76c97819f9137e7a2506d494c6",
-  "snapshotLength": 39377,
-  "publishedAt": "2026-10-01T13:52:32.967Z",
-  "expiresAt": "2026-10-31T13:52:32.967Z",
-  "signature": "d8fa39608384366dabb746cdef0dbcfb87c6382d0e90c474144df86aee1fa4ab32d3b7a2548ffcc07638633905edb6d9ed25f5638c9ab863e8936189570f2c0c"
+  "version": 40,
+  "snapshotId": "v0.2-host-screenshots-20261003",
+  "snapshotPath": "snapshots/v0.2-host-screenshots-20261003/snapshot.json",
+  "snapshotSha256": "37695f5ff4030645a6ddcee010bc008ab7b94618a05ae45a3e2e7c6bd56c67e3",
+  "snapshotLength": 39572,
+  "publishedAt": "2026-10-03T16:28:51.176Z",
+  "expiresAt": "2026-11-02T16:28:51.176Z",
+  "signature": "c466e55d0f0245eb438ff7516474d01801ccf50c13627285ecc6f0903f740dd64edbddfabc5f51928ea7878514a3b3b59e7e1fd6857974ae6d8579beca001b0d"
 }
