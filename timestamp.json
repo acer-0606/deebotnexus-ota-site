@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "kind": "deebotOtaTimestamp",
   "channel": "stable",
-  "version": 42,
-  "snapshotId": "v0.2-plugin-manager-20261004-1",
-  "snapshotPath": "snapshots/v0.2-plugin-manager-20261004-1/snapshot.json",
-  "snapshotSha256": "33e2053dfa1bb6dfc411e9b03c1e08978be04e9b215cf5a6beefcbe0cac6e3f9",
-  "snapshotLength": 39572,
-  "publishedAt": "2026-10-04T05:52:26.091Z",
-  "expiresAt": "2026-11-03T05:52:26.091Z",
-  "signature": "f7ca8a2ac2848ede91a77d29f0bac587761e2e6af0813a8f7561a4d51318f9fef5d0e0635de241b259fe43a535b7be3c079ca064a9b0286ec8187096bb752c06"
+  "version": 43,
+  "snapshotId": "v0.2-macos-runtime-medusa-20261009T070036Z",
+  "snapshotPath": "snapshots/v0.2-macos-runtime-medusa-20261009T070036Z/snapshot.json",
+  "snapshotSha256": "fe2f4332695836a178b137d636d334d163e5e026d59c63588b0fd816908e298a",
+  "snapshotLength": 39580,
+  "publishedAt": "2026-10-09T07:00:36Z",
+  "expiresAt": "2026-11-08T07:00:36.000Z",
+  "signature": "95d72bff6b8f770633cea7d7cfb1150631a7a33f9e20f8281649a3a02ff211ec6573a47fc7a02adcf93a645dd5bd91a24515837cfbd2a43eb20203457442f201"
 }
