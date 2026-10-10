@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "kind": "deebotOtaTimestamp",
   "channel": "stable",
-  "version": 44,
-  "snapshotId": "v0.2-lds-imu-mac-windows-20261010T020027Z",
-  "snapshotPath": "snapshots/v0.2-lds-imu-mac-windows-20261010T020027Z/snapshot.json",
-  "snapshotSha256": "adb5ed0e75ff16502b74c287eab0601af7bc641eb0e1bcf8ebaf205e98cde14f",
-  "snapshotLength": 39881,
-  "publishedAt": "2026-10-10T02:00:27Z",
-  "expiresAt": "2026-11-09T02:00:27.000Z",
-  "signature": "208859980209c6b112159704c5b6ad8a60eab27a94cf41786ec2126fd7409da507cfa8fd13e5a01617777ae12d5b1483bb36aa1fb88c4815a5b6c4184cd69603"
+  "version": 45,
+  "snapshotId": "v0.2-lds-imu-ui-mac-windows-20261010T054321Z",
+  "snapshotPath": "snapshots/v0.2-lds-imu-ui-mac-windows-20261010T054321Z/snapshot.json",
+  "snapshotSha256": "7c0eadfde4f4eccb1eec33ca974da257ee7a7d769cbaf51b37dc6e3a51102254",
+  "snapshotLength": 39712,
+  "publishedAt": "2026-10-10T05:43:21Z",
+  "expiresAt": "2026-11-09T05:43:21.000Z",
+  "signature": "3dfeea05be80c7140bf6d00ed87def931bdececa51bf6974bc7b5313300018fc74e6bed95212eb8c33592e8cebaf9ebc63bbba134230606a0dadc2b8cd5f130e"
 }
