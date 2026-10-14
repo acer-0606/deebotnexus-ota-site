@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "kind": "deebotOtaTimestamp",
   "channel": "stable",
-  "version": 51,
-  "snapshotId": "v0.2-lds-angle-picking-20261014T121050Z",
-  "snapshotPath": "snapshots/v0.2-lds-angle-picking-20261014T121050Z/snapshot.json",
-  "snapshotSha256": "cd56b92900fa3beea27dd000d66a522480b247428a98ce706489b498bfd8e8e0",
-  "snapshotLength": 40195,
-  "publishedAt": "2026-10-14T12:10:50.665Z",
-  "expiresAt": "2026-11-13T12:10:50.665Z",
-  "signature": "ae97c40512ad1a26e605e9d6a24fc8ef554c0490f97a49232d2e0393c6b1de1d00da96e45316d7b1fdd5c0286087afeba0838e7209ac4e74b9cfb2fb99878e00"
+  "version": 52,
+  "snapshotId": "v0.2-ranking-replay-20261014T142939Z",
+  "snapshotPath": "snapshots/v0.2-ranking-replay-20261014T142939Z/snapshot.json",
+  "snapshotSha256": "9b6c108b6e2842833b62e1b29517557fee21bdfbf234218d2d5ae1a1e5a4f7da",
+  "snapshotLength": 40246,
+  "publishedAt": "2026-10-14T14:29:39.350Z",
+  "expiresAt": "2026-11-13T14:29:39.350Z",
+  "signature": "5311adee77361a80e6c38bda5091a431473b884d9b4d1e935c318da040928c91a8a5f6262d3ab31fbf6babfed74f6f7f2f05f481294dfd96c11b8e94e4af7301"
 }
