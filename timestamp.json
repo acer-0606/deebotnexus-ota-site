@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "kind": "deebotOtaTimestamp",
   "channel": "stable",
-  "version": 48,
-  "snapshotId": "v0.2-analysis-mac-windows-20261012T225310Z",
-  "snapshotPath": "snapshots/v0.2-analysis-mac-windows-20261012T225310Z/snapshot.json",
-  "snapshotSha256": "8bd5f97bd0e280fc4a90e006dd6cda7c9ada0e94d9d007b6bb95c9ec381c2638",
-  "snapshotLength": 39294,
-  "publishedAt": "2026-10-12T22:53:10.180Z",
-  "expiresAt": "2026-11-11T22:53:10.180Z",
-  "signature": "965ddca57f990ea2f17ed7fc199b8dc03c34987b716a0f743d27b9087e6189854153d4de55daee23b8620d1fb4ef1b6e457844ebe33a78183dd53bc75ffe220e"
+  "version": 49,
+  "snapshotId": "v0.2-analysis-mac-windows-20261014T014241Z",
+  "snapshotPath": "snapshots/v0.2-analysis-mac-windows-20261014T014241Z/snapshot.json",
+  "snapshotSha256": "edebe39a0e89e343f549a5d74b30e02f07c249bf047a6803b4094d094b07083c",
+  "snapshotLength": 40346,
+  "publishedAt": "2026-10-14T01:42:41.678Z",
+  "expiresAt": "2026-11-13T01:42:41.678Z",
+  "signature": "10134073355e17109f32382a90f4eaf06869c5347c6a5b5b754c63cc3cddff499298e9edce4acae98c353d839a904a42d9f89a14dc9d7b4f6aab12974394b005"
 }
