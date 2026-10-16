@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "kind": "deebotOtaTimestamp",
   "channel": "stable",
-  "version": 56,
-  "snapshotId": "v0.2-lds-filter-draft-20261016T090834Z",
-  "snapshotPath": "snapshots/v0.2-lds-filter-draft-20261016T090834Z/snapshot.json",
-  "snapshotSha256": "cc313361d08c308940c19695e1e3536751f70a1e67c457c918e53b03860add13",
-  "snapshotLength": 40182,
-  "publishedAt": "2026-10-16T09:18:41.054Z",
-  "expiresAt": "2026-11-15T09:18:41.054Z",
-  "signature": "168bc438704c10450856b041dd5d6ccc9d55d036f2127954afc05561172df4d4f8a1f6245bd33996b222f51f0cfeb766db49e8176c767d6dfac4926102bb9908"
+  "version": 57,
+  "snapshotId": "v0.2-lds-angle-markers-20261016T092822Z",
+  "snapshotPath": "snapshots/v0.2-lds-angle-markers-20261016T092822Z/snapshot.json",
+  "snapshotSha256": "3279d5d0c249dfc0a7d7cf0ca3e5943b0e4898a918884ab6173f9459225ee638",
+  "snapshotLength": 40209,
+  "publishedAt": "2026-10-16T09:28:22.638Z",
+  "expiresAt": "2026-11-15T09:28:22.638Z",
+  "signature": "0ea12a95309639c96d46aba4a006f8ae087941890ce183c4fd9031ea20f3c35a327e31b95d2a93e4c8bb129bcdb756fb13e5f52d2abce9407fe8bf643f32c909"
 }
