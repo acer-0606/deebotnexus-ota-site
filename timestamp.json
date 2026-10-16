@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "kind": "deebotOtaTimestamp",
   "channel": "stable",
-  "version": 53,
-  "snapshotId": "v0.2-lds-motion-20261015T065959Z",
-  "snapshotPath": "snapshots/v0.2-lds-motion-20261015T065959Z/snapshot.json",
-  "snapshotSha256": "b08a0ea14ce0dd4ca67c99704a677a61ed44750c28313ed44ba4c0db30cc10d9",
-  "snapshotLength": 40290,
-  "publishedAt": "2026-10-15T06:59:59.673Z",
-  "expiresAt": "2026-11-14T06:59:59.673Z",
-  "signature": "ccae9c9dead62b3cd87f83f0a4003cfc73d5791b343b2c8bf6c2de43188f74ba9ad105db8c955368035524575a106c7ae9a91b6330d52dd2fd56a9ab0c364e09"
+  "version": 54,
+  "snapshotId": "v0.2-lds-duration-20261016T044601Z",
+  "snapshotPath": "snapshots/v0.2-lds-duration-20261016T044601Z/snapshot.json",
+  "snapshotSha256": "848beab650287edb4806a48ce1a3fc9bc64ad21dfed54556dada0fa63cbac479",
+  "snapshotLength": 40146,
+  "publishedAt": "2026-10-16T04:46:01.045Z",
+  "expiresAt": "2026-11-15T04:46:01.045Z",
+  "signature": "d048d5a6dda6167652e9244edfff2f6ebf68c6ee52afb4d5f8a0de083d7042c475ac547fbdc80241979daefd2998e7fbcf095c303c665d1cece7a68cd336450f"
 }
