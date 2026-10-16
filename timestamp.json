@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "kind": "deebotOtaTimestamp",
   "channel": "stable",
-  "version": 57,
-  "snapshotId": "v0.2-lds-angle-markers-20261016T092822Z",
-  "snapshotPath": "snapshots/v0.2-lds-angle-markers-20261016T092822Z/snapshot.json",
-  "snapshotSha256": "3279d5d0c249dfc0a7d7cf0ca3e5943b0e4898a918884ab6173f9459225ee638",
-  "snapshotLength": 40209,
-  "publishedAt": "2026-10-16T09:28:22.638Z",
-  "expiresAt": "2026-11-15T09:28:22.638Z",
-  "signature": "0ea12a95309639c96d46aba4a006f8ae087941890ce183c4fd9031ea20f3c35a327e31b95d2a93e4c8bb129bcdb756fb13e5f52d2abce9407fe8bf643f32c909"
+  "version": 58,
+  "snapshotId": "v0.2-sensor-3d-draft-20261016T093637Z",
+  "snapshotPath": "snapshots/v0.2-sensor-3d-draft-20261016T093637Z/snapshot.json",
+  "snapshotSha256": "8d30d1f2a960ed099226c6f49cf7c32364dd070a67fb1c27eaaef6d7aee297c0",
+  "snapshotLength": 40541,
+  "publishedAt": "2026-10-16T09:44:03.701Z",
+  "expiresAt": "2026-11-15T09:44:03.701Z",
+  "signature": "e09992aaae0d4c647a3c01ed089dda5a40a70752962f009e2a265e1d713fd554ea88918a802bb0e7179697cf4a605119302c6afaa05679f3c8f35325d54c300f"
 }
