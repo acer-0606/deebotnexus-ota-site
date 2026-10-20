@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "kind": "deebotOtaTimestamp",
   "channel": "stable",
-  "version": 60,
-  "snapshotId": "v0.2-medusa-abi3-20261019T092048Z",
-  "snapshotPath": "snapshots/v0.2-medusa-abi3-20261019T092048Z/snapshot.json",
-  "snapshotSha256": "f86345e8dac33e6fa468578cbd631d993d36b03b5444e64a494e35f68843edcd",
-  "snapshotLength": 40567,
-  "publishedAt": "2026-10-19T09:20:48.000Z",
-  "expiresAt": "2026-11-18T09:20:48.000Z",
-  "signature": "f8f5d4b993af8cec5c6fd4be25ca6d70d3af7e93af0d2a80de6c52f5a34dcb0f5cd90488c5e70740420990c5ccb9c373c5560da715ce74bc202860a3a3f3b40e"
+  "version": 61,
+  "snapshotId": "v0.2-adb-autostart-20261020T013951Z",
+  "snapshotPath": "snapshots/v0.2-adb-autostart-20261020T013951Z/snapshot.json",
+  "snapshotSha256": "8b1702a9a6afc136a57650e372861873f0024a29420e1eda085be70a9343d932",
+  "snapshotLength": 40565,
+  "publishedAt": "2026-10-20T01:39:51Z",
+  "expiresAt": "2026-11-19T01:39:51.000Z",
+  "signature": "669df1b07898aab456c1ad3a6d6db289f046d6a08627e8f5b080911f9f065eb78a945f3d20387a0a484d7cfd1716550c732ba3f358f5a6ba2434363ac1413d0c"
 }
