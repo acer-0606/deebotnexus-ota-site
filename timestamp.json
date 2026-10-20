@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "kind": "deebotOtaTimestamp",
   "channel": "stable",
-  "version": 61,
-  "snapshotId": "v0.2-adb-autostart-20261020T013951Z",
-  "snapshotPath": "snapshots/v0.2-adb-autostart-20261020T013951Z/snapshot.json",
-  "snapshotSha256": "8b1702a9a6afc136a57650e372861873f0024a29420e1eda085be70a9343d932",
-  "snapshotLength": 40565,
-  "publishedAt": "2026-10-20T01:39:51Z",
-  "expiresAt": "2026-11-19T01:39:51.000Z",
-  "signature": "669df1b07898aab456c1ad3a6d6db289f046d6a08627e8f5b080911f9f065eb78a945f3d20387a0a484d7cfd1716550c732ba3f358f5a6ba2434363ac1413d0c"
+  "version": 62,
+  "snapshotId": "v0.2-imu-wheel-rewind-pause-20261020T154600Z",
+  "snapshotPath": "snapshots/v0.2-imu-wheel-rewind-pause-20261020T154600Z/snapshot.json",
+  "snapshotSha256": "964ecde60168047cf03a4feff48660da3c02647579499a0c60cd517c3e109d4e",
+  "snapshotLength": 40722,
+  "publishedAt": "2026-10-20T15:45:06.597Z",
+  "expiresAt": "2026-11-19T15:45:06.597Z",
+  "signature": "7589e68c484ad0209a75870f6d588271234a915d51cd8f83f42abfea6e3430256f103f3c9c1291795c47f711b39ed531ac47b671ca585cd0bb285b368b9e470b"
 }
