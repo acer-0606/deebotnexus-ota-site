@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "kind": "deebotOtaTimestamp",
   "channel": "stable",
-  "version": 64,
-  "snapshotId": "v0.2-imu-wheel-rotation-order-20261026",
-  "snapshotPath": "snapshots/v0.2-imu-wheel-rotation-order-20261026/snapshot.json",
-  "snapshotSha256": "6469164cbabe22859fdb63bd8af11d902593e62dbebb1923e3909aa50bd7aef8",
-  "snapshotLength": 41008,
-  "publishedAt": "2026-10-26T07:20:36.119Z",
-  "expiresAt": "2026-11-25T07:20:36.119Z",
-  "signature": "eb3e4d56b1f9fde371a635af878d402ed98ff240768b76a50c8d1a707355f36d189b78465bd4c992d9d448f549b412cc533a5b3798b8cd0099bfd51f18bfdb01"
+  "version": 65,
+  "snapshotId": "v0.2-20261028T00280",
+  "snapshotPath": "snapshots/v0.2-20261028T00280/snapshot.json",
+  "snapshotSha256": "fb78fb002a4b582f5055d4e73797e239492f0cbb028c906456645d08b0b9b399",
+  "snapshotLength": 39647,
+  "publishedAt": "2026-10-28T00:28:01.231Z",
+  "expiresAt": "2026-11-27T00:28:01.231Z",
+  "signature": "50fff3cce2f59af8153810d34e33c5ae004b2173f1045357c184374e2b10e36dcac3dec25c8f140045f0ff7eedc7e8f460c60cee71c61a026122b673faf1ad02"
 }
