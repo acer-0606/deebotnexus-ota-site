@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "kind": "deebotOtaTimestamp",
   "channel": "stable",
-  "version": 66,
-  "snapshotId": "v0.2-20261028T10223",
-  "snapshotPath": "snapshots/v0.2-20261028T10223/snapshot.json",
-  "snapshotSha256": "c4a604ae9ffdc9cd9351b34323eaf872294623e0c9e2cc9074d02dd09a317163",
-  "snapshotLength": 39525,
-  "publishedAt": "2026-10-28T10:22:34.350Z",
-  "expiresAt": "2026-11-27T10:22:34.350Z",
-  "signature": "349bba3683f653e105e8f52a8b78e57846b940ca93bf9494c4babf3aeca3a0e3df83cb3f66e8d0b41d665e8bd6eda16d92fe96bbe24644c6a763c49593c01604"
+  "version": 67,
+  "snapshotId": "v0.2-20261030-lds-spatial-031",
+  "snapshotPath": "snapshots/v0.2-20261030-lds-spatial-031/snapshot.json",
+  "snapshotSha256": "9b41527cbae70dd1894fb5f9dd8662c51e0f37ed44665f28b185cd6d2b8cb86f",
+  "snapshotLength": 39703,
+  "publishedAt": "2026-10-30T04:18:34.962Z",
+  "expiresAt": "2026-11-29T04:18:34.962Z",
+  "signature": "b51030a42d864b6b27a2ac21ccaaa991ff5328aa9ecd727f38b703b0ff3524e6c2e1fd8c2c1c00a592ead40e85cb2a75bc18598dd4014a62ddfc3ea91624d404"
 }
