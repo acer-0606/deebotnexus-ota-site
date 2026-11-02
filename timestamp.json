@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "kind": "deebotOtaTimestamp",
   "channel": "stable",
-  "version": 71,
-  "snapshotId": "v0.2-20261102-lds-slam-035",
-  "snapshotPath": "snapshots/v0.2-20261102-lds-slam-035/snapshot.json",
-  "snapshotSha256": "b005a93022591b9ab06363847968bd574d5a90c5049035a0bcab8ccddf391003",
-  "snapshotLength": 39716,
-  "publishedAt": "2026-11-02T09:03:35.209Z",
-  "expiresAt": "2026-12-02T09:03:35.209Z",
-  "signature": "c8eb49b683ad634669ce3a79f6194c4ac2a43a20922e21a7e5c66db862312cf8a2c887d5fc2b880f6654447eb72b5b05d744f7fc6da862b0c80fd2b318ae6f04"
+  "version": 72,
+  "snapshotId": "v0.2-20261102-lds-slam-save-036",
+  "snapshotPath": "snapshots/v0.2-20261102-lds-slam-save-036/snapshot.json",
+  "snapshotSha256": "efc399c19a11d8ad1386b5c0f4b0be1f1dc3f2c3c240b9edf6c0908d54319fb2",
+  "snapshotLength": 39645,
+  "publishedAt": "2026-11-02T09:19:06.899Z",
+  "expiresAt": "2026-12-02T09:19:06.899Z",
+  "signature": "1ea1e32455957ab1f60455c9a6be2e867fd3c50c5b7fb159f63e0513cc85d80dda27dd15c61bb48131264cdf909c891f79d9eb1dbf88c58f36e681536099cf0d"
 }
