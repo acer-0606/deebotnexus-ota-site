@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "kind": "deebotOtaTimestamp",
   "channel": "stable",
-  "version": 68,
-  "snapshotId": "v0.2-20261102-lds-spatial-032",
-  "snapshotPath": "snapshots/v0.2-20261102-lds-spatial-032/snapshot.json",
-  "snapshotSha256": "cc4f5462653e4470fda5f523f6b217051ea439e5ddcbe8c9fc1ae5a0469a3b8d",
-  "snapshotLength": 39799,
-  "publishedAt": "2026-11-02T03:54:08.329Z",
-  "expiresAt": "2026-12-02T03:54:08.329Z",
-  "signature": "cd7839363188f51eb83e2bf7778bd64c704de28fc20ab4186b316b1913d5d0a397d786e257efa96f5f4f10c4c43e54c8a01cdb65310bdf23b0b604f9fdca580b"
+  "version": 69,
+  "snapshotId": "v0.2-20261102-lds-zaxis-033",
+  "snapshotPath": "snapshots/v0.2-20261102-lds-zaxis-033/snapshot.json",
+  "snapshotSha256": "978896ab040f7d0797c0f1ef5f64b6a541b96e31a292f21dd1dbab1bc4a7c14e",
+  "snapshotLength": 39773,
+  "publishedAt": "2026-11-02T04:25:32.420Z",
+  "expiresAt": "2026-12-02T04:25:32.420Z",
+  "signature": "e9a348e047106f193ca6bc4272c4f01aeb3bca69c8711f1990de2c98df38ea23e60add11bb78bab8db00b3d2f91f736b86edd7080345af4eff12d08dba910904"
 }
