@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "kind": "deebotOtaTimestamp",
   "channel": "stable",
-  "version": 69,
-  "snapshotId": "v0.2-20261102-lds-zaxis-033",
-  "snapshotPath": "snapshots/v0.2-20261102-lds-zaxis-033/snapshot.json",
-  "snapshotSha256": "978896ab040f7d0797c0f1ef5f64b6a541b96e31a292f21dd1dbab1bc4a7c14e",
-  "snapshotLength": 39773,
-  "publishedAt": "2026-11-02T04:25:32.420Z",
-  "expiresAt": "2026-12-02T04:25:32.420Z",
-  "signature": "e9a348e047106f193ca6bc4272c4f01aeb3bca69c8711f1990de2c98df38ea23e60add11bb78bab8db00b3d2f91f736b86edd7080345af4eff12d08dba910904"
+  "version": 70,
+  "snapshotId": "v0.2-20261102-lds-rotation-034",
+  "snapshotPath": "snapshots/v0.2-20261102-lds-rotation-034/snapshot.json",
+  "snapshotSha256": "2fc58253860600047b9ab626e1dd567acb3268819fcb4f484694a79a01e41834",
+  "snapshotLength": 39758,
+  "publishedAt": "2026-11-02T05:55:20.180Z",
+  "expiresAt": "2026-12-02T05:55:20.180Z",
+  "signature": "5eef448e051e0e767f501f369f1a56c3e18df98592199495dbd60a05e6e41cfa19ced021ef7767243023835025380624c53bc731592d80b7b3b48d3e10a86308"
 }
