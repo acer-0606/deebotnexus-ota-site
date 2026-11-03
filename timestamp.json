@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "kind": "deebotOtaTimestamp",
   "channel": "stable",
-  "version": 73,
-  "snapshotId": "v0.2-20261102-lds-slam-extrinsics-037",
-  "snapshotPath": "snapshots/v0.2-20261102-lds-slam-extrinsics-037/snapshot.json",
-  "snapshotSha256": "a852d301bfe0df0c53c872d0f9747cad872f4c755e1c8bd69eeb8a547ba20721",
-  "snapshotLength": 39721,
-  "publishedAt": "2026-11-02T09:31:52.254Z",
-  "expiresAt": "2026-12-02T09:31:52.254Z",
-  "signature": "791520a2d51d24483f5ada691b441faec46815aae27e9d580c08ce9cccf113e6b8fb8b8a4cc019e8cb8de77318e33e9dbbb51b27c9f509bd0a6e474683785102"
+  "version": 74,
+  "snapshotId": "v0.2-20261103-arm32-app",
+  "snapshotPath": "snapshots/v0.2-20261103-arm32-app/snapshot.json",
+  "snapshotSha256": "f9438820976a2794656472fad35ac73efff82d4dbebb9c3004cd531a9ec79ab0",
+  "snapshotLength": 39707,
+  "publishedAt": "2026-11-03T03:38:45.459Z",
+  "expiresAt": "2026-12-03T03:38:45.459Z",
+  "signature": "c7150c563bb4c4236a3c0c67b41c55f774cd67c194094a1afa12a2955a74e52ba8d56e671453e511e02970f6bcc63a6b022e2cee8f7ab75f992c95b2ed4f8f01"
 }
