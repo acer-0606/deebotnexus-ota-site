@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "kind": "deebotOtaTimestamp",
   "channel": "stable",
-  "version": 83,
-  "snapshotId": "v0.2-20261125-compact-logs-0142-0125",
-  "snapshotPath": "snapshots/v0.2-20261125-compact-logs-0142-0125/snapshot.json",
-  "snapshotSha256": "2278125cc1a945280e6ee51103f1e8b6a02f47a49a9d3dae11ccc5773416a608",
-  "snapshotLength": 39454,
-  "publishedAt": "2026-11-25T05:57:53.588Z",
-  "expiresAt": "2026-12-25T05:57:53.588Z",
-  "signature": "7cb4c1dc462142ee4c168da967d8c32703702f139976620da6b42ba77c6c619896d3d9107b9051101dfc7d05bfe07ad402153ece8f1003edf40d354ed7af5c03"
+  "version": 84,
+  "snapshotId": "v0.2-20261126-imu-wheel-0126",
+  "snapshotPath": "snapshots/v0.2-20261126-imu-wheel-0126/snapshot.json",
+  "snapshotSha256": "281c23c29deacb35c156680532df9675d151ac23e658af57c212e0b6f0fe8db6",
+  "snapshotLength": 39418,
+  "publishedAt": "2026-11-26T02:33:12.052Z",
+  "expiresAt": "2026-12-26T02:33:12.052Z",
+  "signature": "2776e03b117d829b543f150b2c70f9cf6a25ff669c46fd6801d7f86e05dd593b710c12e7a98cc5ac289836345098a67be9952dede150b2b0b78f28e4d159b50e"
 }
